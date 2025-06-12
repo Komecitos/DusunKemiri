@@ -28,6 +28,17 @@
                 <a href="{{ url('/demografi') }}" class="hover:text-green-600">Demografi</a>
                 <a href="{{ url('/kegiatan') }}" class="hover:text-green-600">Kegiatan</a>
                 <a href="{{ url('/kontak') }}" class="hover:text-green-600">Kontak</a>
+
+                <!-- <a href="{{ url('/admin') }}" class="hover:text-green-600">Admin</a> -->
+
+                <a href="{{ route('login') }}"
+                    onclick="window.open(this.href, '_blank', 'width=600,height=700'); return false;"
+                    class="text-gray-600 hover:text-blue-600 font-semibold">
+                    Admin
+                </a>
+
+
+
             </nav>
         </div>
     </header>
