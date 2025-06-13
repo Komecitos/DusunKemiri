@@ -20,7 +20,6 @@
                 <span class="font-bold text-lg text-green-700">Dusun Kemiri</span>
             </a>
 
-
             {{-- Navigation Menu --}}
             <nav class="hidden md:flex space-x-6 text-sm">
                 <a href="{{ url('/') }}" class="hover:text-green-600">Home</a>
@@ -28,18 +27,16 @@
                 <a href="{{ url('/demografi') }}" class="hover:text-green-600">Demografi</a>
                 <a href="{{ url('/kegiatan') }}" class="hover:text-green-600">Kegiatan</a>
                 <a href="{{ url('/kontak') }}" class="hover:text-green-600">Kontak</a>
-
-                <!-- <a href="{{ url('/admin') }}" class="hover:text-green-600">Admin</a> -->
-
-                <a href="{{ route('login') }}"
-                    onclick="window.open(this.href, '_blank', 'width=600,height=700'); return false;"
-                    class="text-gray-600 hover:text-blue-600 font-semibold">
-                    Admin
-                </a>
-
-
-
             </nav>
+
+            {{-- Login Admin --}}
+            <div class="text-sm">
+                @if(!session('admin_logged_in'))
+                <a href="{{ url('/login-admin') }}" class="text-green-700 hover:text-green-900" target="_blank">Login Admin</a>
+                @else
+                <a href="{{ url('/admin') }}" class="text-green-700 font-semibold hover:text-green-900">Dashboard</a>
+                @endif
+            </div>
         </div>
     </header>
 
@@ -52,6 +49,8 @@
     <footer class="bg-gray-200 text-center p-4 text-sm text-gray-600">
         &copy; 2025 Dusun Kemiri
     </footer>
+
+
 
 </body>
 

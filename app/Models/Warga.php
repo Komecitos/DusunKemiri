@@ -9,14 +9,5 @@ class Warga extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nama',
-        'nik',
-        'jenis_kelamin',
-        'alamat',
-        'dusun',
-        'agama',
-        'tanggal_lahir',
-        'pekerjaan',
-    ];
+    protected $fillable = ['nama', 'alamat', 'jenis_kelamin', 'umur', 'no_kk', 'nik', 'tanggal_lahir', 'pekerjaan', 'pendidikan_terakhir', 'dusun', 'rt_rw'];
 }

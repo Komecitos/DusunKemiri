@@ -13,7 +13,7 @@
         data: {
             labels: ['Anak (<18)', 'Dewasa (18-59)', 'Lansia (60+)'],
             datasets: [{
-                data: @json([$anak, $dewasa, $lanjutUsia]),
+                // data: @json([$anak, $dewasa, $lanjutUsia]),
                 backgroundColor: [
                     'rgba(255, 206, 86, 0.8)',
                     'rgba(54, 162, 235, 0.8)',
