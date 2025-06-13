@@ -5,11 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
-//admin
-
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\DemografiController;
+
+use App\Http\Controllers\Public\BeritaController as PublicBeritaController;
+
 
 
 
@@ -26,6 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/berita', [PublicBeritaController::class, 'index'])->name('berita.index');
+Route::get('/berita/{slug}', [PublicBeritaController::class, 'show'])->name('berita.show');
+
+Route::get('/demografi', [DemografiController::class, 'index'])->name('demografi.index');
 
 require __DIR__ . '/auth.php';
 
@@ -53,6 +60,13 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         // Hapus Warga
         Route::delete('/warga/{id}', [WargaController::class, 'destroy'])->name('admin.warga.destroy');
     });
+
+    Route::prefix('admin')->middleware('auth')->group(function () {
+        Route::resource('berita', BeritaController::class, [
+            'as' => 'admin' // route name = admin.berita.index, admin.berita.create, dll
+        ]);
+    });
+
 
     // Data Berita
     Route::get('/berita', [BeritaController::class, 'index'])->name('admin.berita');

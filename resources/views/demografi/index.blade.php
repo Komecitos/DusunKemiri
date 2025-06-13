@@ -1,44 +1,61 @@
 @extends('layouts.app')
 
 @section('content')
-
-<canvas id="usiaPieChart"></canvas>
+<div class="container py-4">
+    <h3 class="mb-4">Piramida Penduduk Berdasarkan Usia dan Jenis Kelamin</h3>
+    <canvas id="piramidaChart" height="400"></canvas>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('usiaPieChart').getContext('2d');
+    const data = @json($data);
 
-    new Chart(ctx, {
-        type: 'pie',
+    const labels = data.map(item => item.usia);
+    const dataLaki = data.map(item => item.laki);
+    const dataPerempuan = data.map(item => item.perempuan);
+
+    new Chart(document.getElementById('piramidaChart'), {
+        type: 'bar',
         data: {
-            labels: ['Anak (<18)', 'Dewasa (18-59)', 'Lansia (60+)'],
+            labels: labels,
             datasets: [{
-                // data: @json([$anak, $dewasa, $lanjutUsia]),
-                backgroundColor: [
-                    'rgba(255, 206, 86, 0.8)',
-                    'rgba(54, 162, 235, 0.8)',
-                    'rgba(255, 99, 132, 0.8)'
-                ],
-                borderColor: 'rgba(255, 255, 255, 1)',
-                borderWidth: 2
-            }]
+                    label: 'Laki-laki',
+                    data: dataLaki,
+                    backgroundColor: '#3490dc',
+                },
+                {
+                    label: 'Perempuan',
+                    data: dataPerempuan,
+                    backgroundColor: '#ff6384',
+                }
+            ]
         },
         options: {
+            indexAxis: 'y',
             responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Distribusi Usia Penduduk'
+            scales: {
+                x: {
+                    stacked: true,
+                    ticks: {
+                        callback: function(value) {
+                            return Math.abs(value);
+                        }
+                    }
                 },
-                legend: {
-                    position: 'bottom'
+                y: {
+                    stacked: true
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${Math.abs(context.raw)}`;
+                        }
+                    }
                 }
             }
         }
     });
 </script>
-
-
-
-
 @endsection

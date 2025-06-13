@@ -1,5 +1,11 @@
 @extends('layouts.admin')
 
+@php
+$currentSort = request('sort', 'nama');
+$currentDir = request('direction', 'asc');
+$newDir = $currentDir === 'asc' ? 'desc' : 'asc';
+@endphp
+
 @section('content')
 <div class="flex justify-between items-center mb-4">
     <h2 class="text-xl font-bold">Data Warga</h2>
@@ -29,13 +35,35 @@
 
 <div class="overflow-x-auto bg-white shadow rounded-lg">
     <table class="w-full text-sm text-left">
-        <thead class="bg-gray-100">
+        <thead class="bg-gray-200">
             <tr>
-                <th class="px-4 py-2">Nama</th>
-                <th class="px-4 py-2">NIK</th>
-                <th class="px-4 py-2">No KK</th>
-                <th class="px-4 py-2">Alamat</th>
-                <th class="px-4 py-2">Pekerjaan</th>
+                <th class="px-4 py-2">
+                    <a href="{{ route('admin.warga', ['sort' => 'nama', 'direction' => $newDir] + request()->except(['sort', 'direction', 'page'])) }}">
+                        Nama {!! $currentSort === 'nama' ? ($currentDir === 'asc' ? '↑' : '↓') : '' !!}
+                    </a>
+                </th>
+                <th class="px-4 py-2">
+                    <a href="{{ route('admin.warga', ['sort' => 'nik', 'direction' => $newDir] + request()->except(['sort', 'direction', 'page'])) }}">
+                        NIK {!! $currentSort === 'nik' ? ($currentDir === 'asc' ? '↑' : '↓') : '' !!}
+                    </a>
+                </th>
+                <th class="px-4 py-2">
+                    <a href="{{ route('admin.warga', ['sort' => 'no_kk', 'direction' => $newDir] + request()->except(['sort', 'direction', 'page'])) }}">
+                        No_KK {!! $currentSort === 'no_kk' ? ($currentDir === 'asc' ? '↑' : '↓') : '' !!}
+                    </a>
+                </th>
+                <th class="px-4 py-2">
+                    <a href="{{ route('admin.warga', ['sort' => 'jenis_kelamin', 'direction' => $newDir] + request()->except(['sort', 'direction', 'page'])) }}">
+                        Jenis Kelamin {!! $currentSort === 'jenis_kelamin' ? ($currentDir === 'asc' ? '↑' : '↓') : '' !!}
+                    </a>
+                </th>
+                <th class="px-4 py-2">
+                    <a href="{{ route('admin.warga', ['sort' => 'pekerjaan', 'direction' => $newDir] + request()->except(['sort', 'direction', 'page'])) }}">
+                        Pekerjaan {!! $currentSort === 'pekerjaan' ? ($currentDir === 'asc' ? '↑' : '↓') : '' !!}
+                    </a>
+                </th>
+
+
                 <th class="px-4 py-2">Aksi</th>
             </tr>
         </thead>
@@ -47,7 +75,7 @@
                 <td class="px-4 py-2">{{ $warga->nama }}</td>
                 <td class="px-4 py-2">{{ $warga->nik }}</td>
                 <td class="px-4 py-2">{{ $warga->no_kk }}</td>
-                <td class="px-4 py-2">{{ $warga->alamat }}</td>
+                <td class="px-4 py-2">{{ $warga->jenis_kelamin }}</td>
                 <td class="px-4 py-2">{{ $warga->pekerjaan }}</td>
                 <td class="px-4 py-2">
                     <a href="{{ route('admin.warga.edit', $warga->id) }}"

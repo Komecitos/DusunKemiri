@@ -56,6 +56,23 @@
                 <label for="rt_rw" class="block font-semibold">RT / RW</label>
                 <input type="text" name="rt_rw" value="{{ old('rt_rw', $warga->rt_rw) }}" class="form-input w-full" required>
             </div>
+
+            <div>
+                <label for="rt" class="block font-semibold">RT</label>
+                <select name="rt" class="form-select w-full" required>
+                    <option value="01" {{ $warga->rt == '01' ? 'selected' : '' }}>RT 01</option>
+                    <option value="02" {{ $warga->rt == '02' ? 'selected' : '' }}>RT 02</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="rw" class="block font-semibold">RW</label>
+                <select name="rw" class="form-select w-full" required>
+                    <option value="01" {{ $warga->rt == '01' ? 'selected' : '' }}>RW 01</option>
+                    <option value="02" {{ $warga->rt == '02' ? 'selected' : '' }}>RW 02</option>
+                    <option value="03" {{ $warga->rt == '03' ? 'selected' : '' }}>RW 03</option>
+                </select>
+            </div>
         </div>
 
         <div class="mt-4">

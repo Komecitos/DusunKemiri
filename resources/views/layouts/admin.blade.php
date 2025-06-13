@@ -20,7 +20,7 @@
                 <a href="{{ route('admin.warga') }}" class="block py-2 px-3 rounded hover:bg-green-100">
                     Kelola Warga
                 </a>
-                <x-admin-nav-item route="admin.berita" label="Kelola Berita" />
+                <x-admin-nav-item route="admin.berita.index" label="Kelola Berita" />
 
                 <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Yakin ingin logout?')">
                     @csrf

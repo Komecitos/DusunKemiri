@@ -19,6 +19,19 @@
         <option value="P">Perempuan</option>
     </select>
 
+    <select name="rt" class="input" required>
+        <option value="">-- RT --</option>
+        <option value="01">RT 01</option>
+        <option value="02">RT 02</option>
+    </select>
+
+    <select name="rt" class="input" required>
+        <option value="">-- RW --</option>
+        <option value="01">RW 01</option>
+        <option value="02">RW 02</option>
+        <option value="03">RW 03</option>
+    </select>
+
     <input type="text" name="pekerjaan" placeholder="Pekerjaan" class="input" required>
     <input type="text" name="pendidikan_terakhir" placeholder="Pendidikan Terakhir" class="input" required>
     <textarea name="alamat" placeholder="Alamat" class="input" required></textarea>

@@ -11,17 +11,25 @@ class WargaController extends Controller
     {
         $query = \App\Models\Warga::query();
 
-        $filter = $request->input('filter', 'nama'); // default ke 'nama'
+        // Pencarian
+        $filter = $request->input('filter', 'nama');
         $search = $request->input('search');
-
         if ($search) {
             $query->where($filter, 'like', "%$search%");
         }
 
-        $wargas = $query->latest()->paginate(10);
+        // Sortir
+        $sort = $request->input('sort', 'nama');
+        $direction = $request->input('direction', 'asc');
+        if (in_array($sort, ['nama', 'nik','no_kk', 'pekerjaan', 'jenis_kelamin']) && in_array($direction, ['asc', 'desc'])) {
+            $query->orderBy($sort, $direction);
+        }
+
+        $wargas = $query->paginate(10);
 
         return view('admin.warga.index', compact('wargas'));
     }
+
 
 
 
@@ -44,6 +52,8 @@ class WargaController extends Controller
             'alamat' => 'required|string',
             'dusun' => 'required|string|max:100',
             'rt_rw' => 'required|string|max:20',
+            'rt' => 'required|in:01,02',
+            'rw' => 'required|in:01,02,03',
         ]);
 
 
@@ -71,6 +81,8 @@ class WargaController extends Controller
             'alamat' => 'required',
             'dusun' => 'required',
             'rt_rw' => 'required',
+            'rt' => 'required|in:01,02',
+            'rw' => 'required|in:01,02,03',
         ]);
 
         Warga::create($request->all());
