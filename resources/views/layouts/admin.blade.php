@@ -21,6 +21,11 @@
                     Kelola Warga
                 </a>
                 <x-admin-nav-item route="admin.berita.index" label="Kelola Berita" />
+                <!-- <x-admin-nav-item route="admin.jadwal.index" label="Kelola Jadwal" /> -->
+                <a href="{{ route('admin.jadwal.index') }}" class="block py-2 px-3 rounded hover:bg-green-100">
+                    Kelola Jadwal
+                </a>
+
 
                 <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Yakin ingin logout?')">
                     @csrf
@@ -48,6 +53,7 @@
                 <x-admin-nav-item route="admin.dashboard" label="Dashboard" />
                 <x-admin-nav-item route="admin.warga" label="Kelola Warga" />
                 <x-admin-nav-item route="admin.berita" label="Kelola Berita" />
+                <x-admin-nav-item route="admin.jadwal.index" label="Kelola Jadwal" />
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit"

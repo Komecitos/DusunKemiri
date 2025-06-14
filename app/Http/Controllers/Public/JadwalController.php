@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Public;
 
 use App\Models\JadwalKegiatan;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class JadwalController extends Controller
@@ -35,4 +36,5 @@ class JadwalController extends Controller
         $kegiatan = JadwalKegiatan::findOrFail($id);
         return view('jadwal.show', compact('kegiatan'));
     }
+
 }
