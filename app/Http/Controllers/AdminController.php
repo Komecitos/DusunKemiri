@@ -39,8 +39,9 @@ class AdminController extends Controller
     public function logout()
     {
         session()->forget('admin_logged_in');
-        return redirect('/login-admin');
+        return view('auth.logout-close');
     }
+
 
     public function index()
     {

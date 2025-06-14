@@ -15,7 +15,7 @@
 <body class="bg-gray-100 text-gray-800">
 
     {{-- Navbar/Header --}}
-    <header class="bg-white shadow-md sticky top-0 z-100">
+    <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
             {{-- Logo --}}
             <a href="{{ url('/') }}" class="flex items-center space-x-2 hover:opacity-80 transition">
@@ -56,8 +56,6 @@
     <footer class="bg-gray-200 text-center p-4 text-sm text-gray-600">
         &copy; 2025 Dusun Kemiri
     </footer>
-
-
 
 </body>
 
