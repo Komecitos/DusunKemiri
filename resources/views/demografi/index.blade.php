@@ -58,4 +58,51 @@
         }
     });
 </script>
+
+<hr class="my-5">
+
+<h4 class="mb-3">Sebaran Tingkat Pendidikan Warga</h4>
+<canvas id="pendidikanChart" height="200"></canvas>
+
+<script>
+    const pendidikanLabels = @json($pendidikan->pluck('pendidikan'));
+    const pendidikanData = @json($pendidikan->pluck('jumlah'));
+
+    new Chart(document.getElementById('pendidikanChart'), {
+        type: 'bar',
+        data: {
+            labels: pendidikanLabels,
+            datasets: [{
+                label: 'Jumlah Warga',
+                data: pendidikanData,
+                backgroundColor: '#38bdf8',
+                borderRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Jumlah Warga'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Tingkat Pendidikan'
+                    }
+                }
+            }
+        }
+    });
+</script>
+
 @endsection

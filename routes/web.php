@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DemografiController;
+use App\Http\Controllers\JadwalController;
 
 use App\Http\Controllers\Public\BeritaController as PublicBeritaController;
 
@@ -33,6 +34,10 @@ Route::get('/berita', [PublicBeritaController::class, 'index'])->name('berita.in
 Route::get('/berita/{slug}', [PublicBeritaController::class, 'show'])->name('berita.show');
 
 Route::get('/demografi', [DemografiController::class, 'index'])->name('demografi.index');
+
+Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
+Route::get('/jadwal/data', [JadwalController::class, 'getData'])->name('jadwal.data');
+Route::get('/jadwal/{id}', [JadwalController::class, 'show'])->name('jadwal.show');
 
 require __DIR__ . '/auth.php';
 

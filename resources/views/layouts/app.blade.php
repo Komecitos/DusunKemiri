@@ -25,7 +25,7 @@
                 <a href="{{ url('/') }}" class="hover:text-green-600">Home</a>
                 <a class="nav-link" href="{{ route('berita.index') }}">Berita</a>
                 <a href="{{ url('/demografi') }}" class="hover:text-green-600">Demografi</a>
-                <a href="{{ url('/kegiatan') }}" class="hover:text-green-600">Kegiatan</a>
+                <a href="{{ url('/jadwal') }}" class="hover:text-green-600">Kegiatan</a>
                 <a href="{{ url('/kontak') }}" class="hover:text-green-600">Kontak</a>
             </nav>
 
