@@ -10,11 +10,15 @@ use App\Http\Controllers\WargaController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DemografiController;
 use App\Http\Controllers\Public\JadwalController as PublicJadwalController;
+use App\Http\Controllers\Public\PetaDusunController as PublicPetaDusunController;
 
 use App\Http\Controllers\Admin\JadwalController as AdminJadwalController;
 
 
 use App\Http\Controllers\Public\BeritaController as PublicBeritaController;
+use App\Http\Controllers\Admin\PetaDusunController as AdminPetaDusunController;
+use App\Http\Controllers\Admin\JadwalController as AdminJadwal;
+
 
 
 
@@ -42,6 +46,8 @@ Route::get('/jadwal', [PublicJadwalController::class, 'index'])->name('jadwal.in
 Route::get('/jadwal/data', [PublicJadwalController::class, 'getData'])->name('jadwal.data');
 Route::get('/jadwal/{id}', [PublicJadwalController::class, 'show'])->name('jadwal.show');
 
+Route::get('/peta-dusun', [PublicPetaDusunController::class, 'index'])->name('peta.index');
+
 require __DIR__ . '/auth.php';
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -59,15 +65,16 @@ Route::get('/jadwal', [PublicJadwal::class, 'index'])->name('jadwal.public');
 Route::get('/jadwal/{id}', [PublicJadwal::class, 'show'])->name('jadwal.show');
 
 // Admin
-use App\Http\Controllers\Admin\JadwalController as AdminJadwal;
 
-Route::prefix('admin')->middleware('auth')->group(function () {
-    Route::get('/jadwal', [AdminJadwal::class, 'index'])->name('admin.jadwal.index');
-    Route::get('/jadwal/create', [AdminJadwal::class, 'create'])->name('admin.jadwal.create');
-    Route::post('/jadwal', [AdminJadwal::class, 'store'])->name('admin.jadwal.store');
-    Route::get('/jadwal/{id}/edit', [AdminJadwal::class, 'edit'])->name('admin.jadwal.edit');
-    Route::put('/jadwal/{id}', [AdminJadwal::class, 'update'])->name('admin.jadwal.update');
-    Route::delete('/jadwal/{id}', [AdminJadwal::class, 'destroy'])->name('admin.jadwal.destroy');
+Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
+    // Route::get('/jadwal', [AdminJadwal::class, 'index'])->name('admin.jadwal.index');
+    // Route::get('/jadwal/create', [AdminJadwal::class, 'create'])->name('admin.jadwal.create');
+    // Route::post('/jadwal', [AdminJadwal::class, 'store'])->name('admin.jadwal.store');
+    // Route::get('/jadwal/{id}/edit', [AdminJadwal::class, 'edit'])->name('admin.jadwal.edit');
+    // Route::put('/jadwal/{id}', [AdminJadwal::class, 'update'])->name('admin.jadwal.update');
+    // Route::delete('/jadwal/{id}', [AdminJadwal::class, 'destroy'])->name('admin.jadwal.destroy');
+    Route::resource('jadwal', AdminJadwal::class);
+    Route::resource('petadusun', AdminPetadusunController::class);
 });
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {

@@ -7,12 +7,15 @@
     <title>@yield('title', 'Dusun Kemiri')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @stack('styles')
+
 </head>
+
 
 <body class="bg-gray-100 text-gray-800">
 
     {{-- Navbar/Header --}}
-    <header class="bg-white shadow-md sticky top-0 z-50">
+    <header class="bg-white shadow-md sticky top-0 z-100">
         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
             {{-- Logo --}}
             <a href="{{ url('/') }}" class="flex items-center space-x-2 hover:opacity-80 transition">
@@ -26,6 +29,7 @@
                 <a class="nav-link" href="{{ route('berita.index') }}">Berita</a>
                 <a href="{{ url('/demografi') }}" class="hover:text-green-600">Demografi</a>
                 <a href="{{ url('/jadwal') }}" class="hover:text-green-600">Kegiatan</a>
+                <a href="{{ route('peta.index') }}" class="hover:text-green-600">Peta Dusun</a>
                 <a href="{{ url('/kontak') }}" class="hover:text-green-600">Kontak</a>
             </nav>
 
@@ -44,6 +48,9 @@
     <main class="container mx-auto px-4 py-6">
         @yield('content')
     </main>
+
+    <!-- @yield('content') -->
+    @stack('scripts')
 
     {{-- Footer --}}
     <footer class="bg-gray-200 text-center p-4 text-sm text-gray-600">
