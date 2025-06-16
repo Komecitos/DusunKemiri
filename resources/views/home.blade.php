@@ -1,62 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="mb-4">
-    <div
-        x-data="{
-        images: [
-            '{{ asset('images/tes/home/desa-1.jpg') }}',
-            '{{ asset('images/tes/home/desa-2.jpg') }}',
-            
-        ],
-        activeIndex: 0,
-        startCarousel() {
-            setInterval(() => {
-                this.activeIndex = (this.activeIndex + 1) % this.images.length;
-            }, 4000); // ganti setiap 4 detik
-        }
-    }"
-        x-init="startCarousel"
-        class="relative w-full h-64 overflow-hidden rounded-lg shadow-md">
-        <template x-for="(image, index) in images" :key="index">
-            <div
-                x-show="activeIndex === index"
-                class="absolute inset-0 transition-opacity duration-700"
-                x-transition:enter="opacity-0"
-                x-transition:enter-start="opacity-0"
-                x-transition:enter-end="opacity-100"
-                x-transition:leave="opacity-100"
-                x-transition:leave-start="opacity-100"
-                x-transition:leave-end="opacity-0">
-                <img :src="image" alt="" class="w-full h-full object-cover">
+
+<section
+    class="py-20 px-4 md:px-10 bg-[url('{{ asset('images/tes/home/desa-1.jpg') }}')] bg-cover bg-center bg-no-repeat">
+    <div class="max-w-6xl mx-auto bg-white/80 backdrop-blur-md rounded-xl shadow-xl overflow-hidden">
+        <div class="md:flex md:items-center gap-8 p-8 md:p-12">
+
+            {{-- Foto Kepala Dusun --}}
+            <div class="md:w-1/3 mb-6 md:mb-0">
+                <img src="{{ asset('images/tes/home/kepdes.jpg') }}" alt="Kepala Dusun" class="rounded-xl shadow-md object-cover w-full h-auto">
             </div>
-        </template>
-    </div>
-</section>
 
-<section class="my-10 bg-white rounded-lg shadow-md p-6" name="sambutan">
-    <div class="md:flex md:items-start md:space-x-6">
-        {{-- Foto Pak Dukuh --}}
-        <div class="md:w-1/3 mb-4 md:mb-0">
-            <img src="{{ asset('images/tes/home/kepdes.jpg') }}" alt="Pak Dukuh" class="rounded-lg shadow w-full h-auto object-cover">
-        </div>
-
-        {{-- Sambutan --}}
-        <div class="md:w-2/3">
-            <h2 class="text-xl font-semibold text-green-700 mb-2">Sambutan Kepala Dusun</h2>
-            <p class="text-gray-700 mb-3 text-justify">
-                Assalamu’alaikum Warahmatullahi Wabarakatuh.
-                Dengan penuh rasa syukur dan kebanggaan, kami menyambut baik hadirnya website resmi Dusun Kemiri ini sebagai media informasi dan komunikasi bagi seluruh warga. Harapan kami, kehadiran platform ini dapat menjadi jembatan antara pemerintah dusun dan masyarakat dalam penyampaian informasi secara cepat, transparan, dan akurat.
-            </p>
-            <p class="text-gray-700 text-justify">
-                Website ini juga diharapkan menjadi media dokumentasi kegiatan, data masyarakat, serta perkembangan pembangunan dusun ke depan. Mari kita manfaatkan teknologi ini secara bijak dan produktif untuk kemajuan bersama. Terima kasih atas dukungan dan partisipasi seluruh warga Dusun Kemiri.
-            </p>
+            {{-- Kata Sambutan --}}
+            <div class="md:w-2/3">
+                <h2 class="text-3xl font-bold text-orangeAccent mb-4 font-sans">Kata Sambutan</h2>
+                <p class="text-darkText font-medium text-justify leading-relaxed mb-4 font-sans">
+                    Assalamu’alaikum Warahmatullahi Wabarakatuh. Dengan penuh rasa syukur dan kebanggaan, kami menyambut baik hadirnya website resmi Dusun Kemiri ini sebagai media informasi dan komunikasi bagi seluruh warga.
+                </p>
+                <p class="text-darkText font-medium text-justify leading-relaxed font-sans">
+                    Website ini diharapkan menjadi sarana dokumentasi, penyampaian informasi, serta penghubung antara masyarakat dan pemerintah dusun. Terima kasih atas partisipasi seluruh warga Dusun Kemiri.
+                </p>
+            </div>
         </div>
     </div>
 </section>
 
-<section>
-    <h3 class="text-md font-semibold">Berita Terbaru</h3>
-    <p>Belum ada berita.</p>
-</section>
 @endsection

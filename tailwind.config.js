@@ -10,9 +10,16 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Instrument Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['Poppins', 'Instrument Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      },
+      colors: {
+        cream: '#FFF7F0',
+        darkText: '#2D2D2D',
+        orangeAccent: '#FA7D09',   // kamu bisa sesuaikan dengan warna aksen yang kamu mau
+        softOrange: '#FFE8D6',
       },
     },
   },
+
   plugins: [],
 };

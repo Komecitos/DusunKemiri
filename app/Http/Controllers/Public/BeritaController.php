@@ -14,6 +14,12 @@ class BeritaController extends Controller
         return view('news.index', compact('berita'));
     }
 
+    public function latest()
+    {
+        $berita_terbaru = News::latest()->take(6)->get();
+        return view('home', compact('berita_terbaru'));
+    }
+
     public function show($slug)
     {
         $berita = News::where('slug', $slug)->firstOrFail();
