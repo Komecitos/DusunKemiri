@@ -26,11 +26,11 @@
             {{-- Navigation Menu --}}
             <nav class="hidden md:flex space-x-6 text-sm">
                 <a href="{{ url('/') }}" class="hover:text-green-600">Home</a>
+                <a href="{{ url('/profil') }}" class="hover:text-green-600">Profil</a>
                 <a class="nav-link" href="{{ route('berita.index') }}">Berita</a>
                 <a href="{{ url('/demografi') }}" class="hover:text-green-600">Demografi</a>
                 <a href="{{ url('/jadwal') }}" class="hover:text-green-600">Kegiatan</a>
                 <a href="{{ route('peta.index') }}" class="hover:text-green-600">Peta Dusun</a>
-                <a href="{{ url('/kontak') }}" class="hover:text-green-600">Kontak</a>
             </nav>
 
             {{-- Login Admin --}}

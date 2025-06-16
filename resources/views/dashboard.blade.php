@@ -12,7 +12,7 @@
     <p>Jumlah Berita: {{ $jumlahBerita }}</p>
 
     <a href="{{ route('admin.warga') }}">Kelo tla Data Warga</a> <br>
-    <a href="{{ route('admin.berita') }}">Kelola Berita</a>
+    <a href="{{ route('admin.berita.index') }}">Kelola Berita</a>
 </body>
 
 </html>

@@ -20,11 +20,17 @@
                 <a href="{{ route('admin.warga') }}" class="block py-2 px-3 rounded hover:bg-green-100">
                     Kelola Warga
                 </a>
-                <x-admin-nav-item route="admin.berita.index" label="Kelola Berita" />
+                <a href="{{ route('admin.berita.index') }}">Berita</a>
                 <a href="{{ route('admin.jadwal.index') }}" class="block py-2 px-3 rounded hover:bg-green-100">
                     Kelola Jadwal
                 </a>
                 <a href="{{ route('admin.petadusun.index') }}">Kelola Marker</a>
+                <a href="{{ route('admin.profil.index') }}" class="block py-2 px-4 hover:bg-gray-100">
+                    🏡 Profil Dusun
+                </a>
+                <a href="{{ route('admin.perangkat.index') }}" class="block py-2 px-4 hover:bg-gray-100">
+                    👥 Perangkat Dusun
+                </a>
                 <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Yakin ingin logout?')">
                     @csrf
                     <button type="submit"
@@ -50,7 +56,7 @@
             <div x-show="open" class="px-4 pb-4 space-y-2 text-sm">
                 <x-admin-nav-item route="admin.dashboard" label="Dashboard" />
                 <x-admin-nav-item route="admin.warga" label="Kelola Warga" />
-                <x-admin-nav-item route="admin.berita" label="Kelola Berita" />
+                <x-admin-nav-item route="admin.berita.index" label="Kelola Berita" />
                 <x-admin-nav-item route="admin.jadwal.index" label="Kelola Jadwal" />
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
