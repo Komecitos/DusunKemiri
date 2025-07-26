@@ -1,15 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Public;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Warga;
+use Illuminate\Support\Facades\Log;
+
 
 class WargaController extends Controller
 {
     public function index(Request $request)
     {
+
         $query = \App\Models\Warga::query();
 
         // Pencarian
@@ -28,10 +31,10 @@ class WargaController extends Controller
 
         $wargas = $query->paginate(10);
 
+
+
         return view('admin.warga.index', compact('wargas'));
     }
-
-
 
 
     public function edit($id)
@@ -45,17 +48,23 @@ class WargaController extends Controller
         $request->validate([
             'nama' => 'required|string|max:100',
             'no_kk' => 'required|string|max:20',
-            'nik' => 'required|string|max:20',
+            'nik' => 'required|string|max:20nik',
+            'status_KK' => 'required',
             'tanggal_lahir' => 'required|date',
-            'jenis_kelamin' => 'required|in:L,P', // ENUM
-            'pekerjaan' => 'required|string|max:100',
-            'pendidikan_terakhir' => 'required|string|max:100',
-            'alamat' => 'required|string',
-            'dusun' => 'required|string|max:100',
-            'rt_rw' => 'required|string|max:20',
-            'rt' => 'required|in:01,02',
-            'rw' => 'required|in:01,02,03',
+            'jenis_kelamin' => 'required|in:L,P',
+            'status_perkawinan' => 'required',
+            'agama' => 'required',
+            'golongan_darah' => 'required',
+            'kategori_penduduk' => 'required',
+            'telepon' => 'nullable|string|max:20',
+            'pekerjaan' => 'required|string|max:50',
+            'pendidikan_terakhir' => 'required',
+            'rt' => 'required',
+            'rw' => 'required',
+            'nomor_rumah' => 'nullable|string|max:10',
+            'alamat' => 'required|string|max:255',
         ]);
+
 
 
         $warga = Warga::findOrFail($id);
@@ -72,18 +81,23 @@ class WargaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'no_kk' => 'required',
-            'nik' => 'required',
+            'nama' => 'required|string|max:100',
+            'no_kk' => 'required|string|max:20',
+            'nik' => 'required|string|max:20|unique:wargas,nik',
+            'status_KK' => 'required',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:L,P',
-            'pekerjaan' => 'required',
+            'status_perkawinan' => 'required',
+            'agama' => 'required',
+            'golongan_darah' => 'required',
+            'kategori_penduduk' => 'required',
+            'telepon' => 'nullable|string|max:20',
+            'pekerjaan' => 'required|string|max:50',
             'pendidikan_terakhir' => 'required',
-            'alamat' => 'required',
-            'dusun' => 'required',
-            'rt_rw' => 'required',
-            'rt' => 'required|in:01,02',
-            'rw' => 'required|in:01,02,03',
+            'rt' => 'required',
+            'rw' => 'required',
+            'nomor_rumah' => 'nullable|string|max:10',
+            'alamat' => 'required|string|max:255',
         ]);
 
         Warga::create($request->all());
@@ -97,5 +111,11 @@ class WargaController extends Controller
         $warga->delete();
 
         return redirect()->route('admin.warga')->with('success', 'Data warga berhasil dihapus.');
+    }
+
+    public function show($id)
+    {
+        $warga = Warga::findOrFail($id);
+        return view('admin.warga.show', compact('warga'));
     }
 }

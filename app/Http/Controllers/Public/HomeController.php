@@ -12,6 +12,6 @@ class HomeController extends Controller
     public function index()
     {
         $berita_terbaru = News::latest()->take(6)->get();
-        return view('', compact('berita_terbaru'));
+        return view('home', compact('berita_terbaru'));
     }
 }

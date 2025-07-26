@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PerangkatDusun;
+use Illuminate\Support\Facades\Storage;
+use Spatie\Image\Image;
+use Spatie\Image\Manipulations;
 
 class PerangkatDusunController extends Controller
 {
     public function index()
     {
-        $perangkat = PerangkatDusun::all();
-        return view('admin.perangkatdusun.index', compact('perangkat'));
+        $perangkats = PerangkatDusun::all();
+        return view('admin.perangkatdusun.index', compact('perangkats'));
     }
 
     public function create()
@@ -22,14 +25,25 @@ class PerangkatDusunController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'jabatan' => 'required',
-            'nomor_hp' => 'required',
-            'email' => 'nullable|email',
-            'alamat' => 'nullable',
+            'nama' => 'required|string|max:255',
+            'jabatan' => 'required|string|max:255',
+            'nomor_hp' => 'required|string|max:20',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        PerangkatDusun::create($request->all());
+        $data = $request->only(['nama', 'jabatan', 'nomor_hp']);
+
+        if ($request->hasFile('foto')) {
+            $path = $request->file('foto')->store('perangkat', 'public');
+
+            // Optimasi gambar
+            $imagePath = storage_path("app/public/{$path}");
+            Image::load($imagePath)->optimize()->save();
+
+            $data['foto'] = $path;
+        }
+
+        PerangkatDusun::create($data);
 
         return redirect()->route('admin.perangkat.index')->with('success', 'Data perangkat berhasil ditambahkan.');
     }
@@ -42,23 +56,46 @@ class PerangkatDusunController extends Controller
 
     public function update(Request $request, $id)
     {
+        $perangkat = PerangkatDusun::findOrFail($id);
+
         $request->validate([
-            'nama' => 'required',
-            'jabatan' => 'required',
-            'nomor_hp' => 'required',
-            'email' => 'nullable|email',
-            'alamat' => 'nullable',
+            'nama' => 'required|string|max:255',
+            'jabatan' => 'required|string|max:255',
+            'nomor_hp' => 'required|string|max:20',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $perangkat = PerangkatDusun::findOrFail($id);
-        $perangkat->update($request->all());
+        $data = $request->only(['nama', 'jabatan', 'nomor_hp']);
+
+        if ($request->hasFile('foto')) {
+            if ($perangkat->foto && Storage::disk('public')->exists($perangkat->foto)) {
+                Storage::disk('public')->delete($perangkat->foto);
+            }
+
+            $path = $request->file('foto')->store('perangkat', 'public');
+
+            // Optimasi gambar
+            $imagePath = storage_path("app/public/{$path}");
+            Image::load($imagePath)->optimize()->save();
+
+            $data['foto'] = $path;
+        }
+
+        $perangkat->update($data);
 
         return redirect()->route('admin.perangkat.index')->with('success', 'Data perangkat berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
-        PerangkatDusun::destroy($id);
-        return back()->with('success', 'Data perangkat berhasil dihapus.');
+        $perangkat = PerangkatDusun::findOrFail($id);
+
+        if ($perangkat->foto && Storage::disk('public')->exists($perangkat->foto)) {
+            Storage::disk('public')->delete($perangkat->foto);
+        }
+
+        $perangkat->delete();
+
+        return redirect()->route('admin.perangkat.index')->with('success', 'Data perangkat berhasil dihapus.');
     }
 }

@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <h3 class="mb-4">📰 Tambah Berita Dusun</h3>
+<div class="max-w-3xl mx-auto bg-white shadow rounded-2xl p-6 font-roboto border border-sogan/30">
+    <h2 class="text-2xl font-bold text-sogan mb-6">Tambah Berita Dusun</h2>
 
     @if ($errors->any())
-    <div class="alert alert-danger">
+    <div class="mb-4 p-4 bg-red-100 text-red-700 border border-red-300 rounded">
         <strong>Terjadi kesalahan!</strong>
-        <ul class="mb-0 mt-1">
+        <ul class="mt-2 list-disc list-inside text-sm">
             @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
             @endforeach
@@ -15,43 +15,64 @@
     </div>
     @endif
 
-    <form action="{{ route('admin.berita.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.berita.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
         @csrf
 
-        <div class="mb-3">
-            <label class="form-label">Judul</label>
-            <input type="text" name="judul" class="form-control" value="{{ old('judul') }}" required>
+        <div>
+            <label class="block font-semibold text-sogan mb-1">Judul</label>
+            <input type="text" name="judul" class="input" value="{{ old('judul') }}" required>
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Isi</label>
-            <textarea name="isi" class="form-control" rows="6" required>{{ old('isi') }}</textarea>
+        <div>
+            <label class="block font-semibold text-sogan mb-1">Isi Berita</label>
+            <textarea name="isi" id="isi-editor" rows="10" class="input">{{ old('isi') }}</textarea>
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Penulis</label>
-            <input type="text" name="penulis" class="form-control" value="{{ old('penulis') }}">
+        <div>
+            <label class="block font-semibold text-sogan mb-1">Penulis</label>
+            <input type="text" name="penulis" class="input" value="{{ old('penulis') }}">
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Tanggal</label>
-            <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') }}">
+        <div>
+            <label class="block font-semibold text-sogan mb-1">Tanggal</label>
+            <input type="date" name="tanggal" class="input" value="{{ old('tanggal') }}">
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Gambar</label>
-            <input type="file" name="gambar" class="form-control">
+        <div>
+            <label class="block font-semibold text-sogan mb-1">Gambar</label>
+            <input type="file" name="gambar" class="input">
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Keterangan Gambar</label>
-            <input type="text" name="keterangan_gambar" class="form-control" value="{{ old('keterangan_gambar') }}">
+        <div>
+            <label class="block font-semibold text-sogan mb-1">Keterangan Gambar</label>
+            <input type="text" name="keterangan_gambar" class="input" value="{{ old('keterangan_gambar') }}">
         </div>
 
-        <div class="d-flex justify-content-between">
-            <a href="{{ route('admin.berita.index') }}" class="btn btn-secondary">← Kembali</a>
-            <button type="submit" class="btn btn-primary">Simpan</button>
+        <div class="flex justify-between pt-4">
+            <a href="{{ route('admin.berita.index') }}" class="bg-sogan/20 text-sogan px-4 py-2 rounded hover:bg-sogan/30 transition">← Kembali</a>
+            <button type="submit" class="bg-kunyit text-white hover:bg-kunyit/90 font-semibold px-6 py-2 rounded transition">Simpan</button>
         </div>
     </form>
 </div>
+
+{{-- CKEditor --}}
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('isi-editor');
+</script>
+
+{{-- Custom Styling --}}
+<style>
+    .input {
+        @apply rounded-xl px-3 py-2 w-full border border-sogan/30 focus:outline-none focus:ring-2 focus:ring-kunyit;
+        background-color: #fffaf3;
+    }
+
+    .font-roboto {
+        font-family: 'Roboto', sans-serif;
+    }
+</style>
+
+{{-- Font --}}
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 @endsection

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use Illuminate\Support\Facades\Log;
+
 
 // Public Controllers
 use App\Http\Controllers\Public\HomeController;
@@ -12,7 +14,6 @@ use App\Http\Controllers\Public\JadwalController as PublicJadwalController;
 use App\Http\Controllers\Public\PetaDusunController;
 use App\Http\Controllers\Public\PerangkatDusunController as PublicPerangkatDusunController;
 use App\Http\Controllers\Public\ProfilDusunController as PublicProfilDusunController;
-use App\Http\Controllers\Public\WargaController;
 
 // Admin Controllers
 use App\Http\Controllers\Admin\AdminController;
@@ -21,6 +22,8 @@ use App\Http\Controllers\Admin\JadwalController as AdminJadwalController;
 use App\Http\Controllers\Admin\PetaDusunController as AdminPetaDusunController;
 use App\Http\Controllers\Admin\PerangkatDusunController as AdminPerangkatDusunController;
 use App\Http\Controllers\Admin\ProfilDusunController as AdminProfilDusunController;
+use App\Http\Controllers\Admin\WargaController as AdminWargaController;
+
 
 Route::get('/', fn() => view('home'));
 
@@ -45,8 +48,13 @@ Route::get('/profil/perangkat', [PublicPerangkatDusunController::class, 'index']
 
 // === Auth Routes ===
 require __DIR__ . '/auth.php';
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+        ->middleware('throttle:5,1'); 
+});
+
+// Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
@@ -56,13 +64,18 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
+    Log::debug('Memuat route /warga dengan ID: ' . request()->route('id'));
+
+
     // Warga
-    Route::get('/warga', [WargaController::class, 'index'])->name('warga');
-    Route::get('/warga/create', [WargaController::class, 'create'])->name('warga.create');
-    Route::post('/warga', [WargaController::class, 'store'])->name('warga.store');
-    Route::get('/warga/{id}/edit', [WargaController::class, 'edit'])->name('warga.edit');
-    Route::put('/warga/{id}', [WargaController::class, 'update'])->name('warga.update');
-    Route::delete('/warga/{id}', [WargaController::class, 'destroy'])->name('warga.destroy');
+    Route::get('/warga', [AdminWargaController::class, 'index'])->name('warga');
+    Route::get('/warga/create', [AdminWargaController::class, 'create'])->name('warga.create');
+    Route::post('/warga', [AdminWargaController::class, 'store'])->name('warga.store');
+    Route::get('/warga/{id}/edit', [AdminWargaController::class, 'edit'])->name('warga.edit');
+    Route::put('/warga/{id}', [AdminWargaController::class, 'update'])->name('warga.update');
+    Route::delete('/warga/{id}', [AdminWargaController::class, 'destroy'])->name('warga.destroy');
+    Route::get('/warga/{id}', [AdminWargaController::class, 'show'])->name('warga.show'); 
+
 
     // CRUD Resources
     Route::resource('berita', AdminBeritaController::class);
@@ -74,6 +87,10 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/profil', [AdminProfilDusunController::class, 'index'])->name('profil.index');
     Route::get('/profil/edit', [AdminProfilDusunController::class, 'edit'])->name('profil.edit');
     Route::put('/profil/update', [AdminProfilDusunController::class, 'update'])->name('profil.update');
+
+    // Home
+    Route::resource('carousel', \App\Http\Controllers\Admin\CarouselController::class);
+    Route::resource('carousels', \App\Http\Controllers\Admin\CarouselController::class);
 });
 
 // === Admin Auth ===

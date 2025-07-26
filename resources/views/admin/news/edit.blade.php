@@ -1,13 +1,15 @@
 @extends('layouts.admin')
 
+@section('title', 'Edit Berita')
+
 @section('content')
-<div class="container">
-    <h3 class="mb-4">✏️ Edit Berita Dusun</h3>
+<div class="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl p-6 font-roboto border border-kunyit">
+    <h2 class="text-3xl font-bold text-sogan mb-6">Edit Berita Dusun</h2>
 
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Terjadi kesalahan!</strong>
-        <ul class="mb-0 mt-1">
+    <div class="mb-4 p-4 bg-red-100 text-red-700 border border-red-300 rounded-lg">
+        <strong>Terjadi kesalahan:</strong>
+        <ul class="mt-2 list-disc list-inside text-sm">
             @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
             @endforeach
@@ -15,50 +17,66 @@
     </div>
     @endif
 
-    <form action="{{ route('admin.berita.update', $berita->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.berita.update', $berita->id) }}" method="POST" enctype="multipart/form-data" class="space-y-5">
         @csrf
         @method('PUT')
 
-        <div class="mb-3">
-            <label class="form-label">Judul</label>
-            <input type="text" name="judul" class="form-control" value="{{ old('judul', $berita->judul) }}" required>
+        <div>
+            <label class="block font-semibold text-sogan mb-1">Judul</label>
+            <input type="text" name="judul" value="{{ old('judul', $berita->judul) }}" class="input" required>
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Isi</label>
-            <textarea name="isi" class="form-control" rows="6" required>{{ old('isi', $berita->isi) }}</textarea>
+        <div>
+            <label class="block font-semibold text-sogan mb-1">Isi</label>
+            <textarea id="editor" name="isi" rows="8" class="input">{{ old('isi', $berita->isi) }}</textarea>
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Penulis</label>
-            <input type="text" name="penulis" class="form-control" value="{{ old('penulis', $berita->penulis) }}">
+        <div>
+            <label class="block font-semibold text-sogan mb-1">Penulis</label>
+            <input type="text" name="penulis" value="{{ old('penulis', $berita->penulis) }}" class="input">
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Tanggal</label>
-            <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal', $berita->tanggal) }}">
+        <div>
+            <label class="block font-semibold text-sogan mb-1">Tanggal</label>
+            <input type="date" name="tanggal" value="{{ old('tanggal', $berita->tanggal) }}" class="input">
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Gambar Baru</label>
-            <input type="file" name="gambar" class="form-control">
+        <div>
+            <label class="block font-semibold text-sogan mb-1">Gambar Baru</label>
+            <input type="file" name="gambar" class="input">
             @if ($berita->gambar)
             <div class="mt-2">
-                <small>Gambar saat ini:</small><br>
-                <img src="{{ asset('storage/' . $berita->gambar) }}" width="200" alt="gambar berita">
+                <small class="text-gray-600">Gambar saat ini:</small><br>
+                <img src="{{ asset('storage/' . $berita->gambar) }}" class="rounded-md mt-1 border border-kunyit max-w-xs" alt="gambar">
             </div>
             @endif
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Keterangan Gambar</label>
-            <input type="text" name="keterangan_gambar" class="form-control" value="{{ old('keterangan_gambar', $berita->keterangan_gambar) }}">
+        <div>
+            <label class="block font-semibold text-sogan mb-1">Keterangan Gambar</label>
+            <input type="text" name="keterangan_gambar" value="{{ old('keterangan_gambar', $berita->keterangan_gambar) }}" class="input">
         </div>
 
-        <div class="d-flex justify-content-between">
-            <a href="{{ route('admin.berita.index') }}" class="btn btn-secondary">← Kembali</a>
-            <button type="submit" class="btn btn-primary">Update</button>
+        <div class="flex justify-between pt-6">
+            <a href="{{ route('admin.berita.index') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-xl shadow transition">← Kembali</a>
+            <button type="submit" class="bg-kunyit hover:bg-[#c69058] text-white px-6 py-2 rounded-xl shadow transition">Update</button>
         </div>
     </form>
 </div>
+
+{{-- CKEditor --}}
+<script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor');
+</script>
+
+{{-- Custom Tailwind Utility --}}
+<style>
+    .input {
+        @apply w-full border border-kunyit rounded-md px-3 py-2 text-sogan focus:outline-none focus:ring-2 focus:ring-kunyit bg-white;
+    }
+</style>
+
+{{-- Font Roboto --}}
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 @endsection

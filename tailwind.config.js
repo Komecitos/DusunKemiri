@@ -4,22 +4,33 @@ module.exports = {
     './resources/**/*.blade.php',
     './resources/**/*.js',
     './resources/**/*.vue',
-    './storage/framework/views/*.php',
-    './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Poppins', 'Instrument Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-      },
       colors: {
-        cream: '#FFF7F0',
-        darkText: '#2D2D2D',
-        orangeAccent: '#FA7D09',   // kamu bisa sesuaikan dengan warna aksen yang kamu mau
-        softOrange: '#FFE8D6',
+        orangeAccent: '#F97316', 
+        softWhite: '#FFFDF9',
+        darkText: '#1F2937',
+        lightGray: '#F3F4F6',
+        muted: '#9CA3AF',
+        greenSuccess: '#D1FAE5',
+        redDanger: '#FECACA',
+        sogan: '#8B5E3C',
+        kunyit: '#F6C177',
+        langit: '#5B9AA0',
+        bata: '#C1440E',
+        lumut: '#7B9E89',
+        pucat: '#FAF9F6',
+        darkText: '#3E3E3E',
+      },
+      fontFamily: {
+        body: ['Roboto', 'sans-serif'],
+        heading: ['Noto Serif', 'serif'],
+      },
+      animation: {
+        spin: 'spin 1s linear infinite',
       },
     },
   },
-
   plugins: [],
-};
+}

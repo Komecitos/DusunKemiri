@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\News;
+use Spatie\ImageOptimizer\OptimizerChainFactory;
+use Intervention\Image\ImageManager;
+use Illuminate\Support\Str;
+
 
 class BeritaController extends Controller
 {
@@ -32,21 +36,32 @@ class BeritaController extends Controller
             'judul' => 'required|string|max:255',
             'isi' => 'required',
             'penulis' => 'nullable|string|max:100',
-            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:4096',
             'keterangan_gambar' => 'nullable|string',
             'tanggal' => 'nullable|date',
         ]);
 
-        $data = $request->all();
+        $data = $request->except('gambar');
 
         if ($request->hasFile('gambar')) {
-            $data['gambar'] = $request->file('gambar')->store('berita', 'public');
+            $image = $request->file('gambar');
+            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('berita', $filename, 'public');
+
+            // Optimasi otomatis gambar yang baru diunggah
+            $absolutePath = storage_path("app/public/{$path}");
+            $optimizerChain = OptimizerChainFactory::create();
+            $optimizerChain->optimize($absolutePath);
+
+            $data['gambar'] = $path;
         }
 
         News::create($data);
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil ditambahkan.');
     }
+
+
 
 
     public function edit($id)

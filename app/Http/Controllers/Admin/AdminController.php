@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\JadwalKegiatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Warga;
 use App\Models\News;
-
+use App\Models\PerangkatDusun;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -26,7 +27,6 @@ class AdminController extends Controller
         $admin = DB::table('admins')->where('username', $username)->first();
 
         if ($admin && Hash::check($password, $admin->password)) {
-            // aman menggunakan hashed password
         }
 
         if ($admin) {
@@ -49,6 +49,10 @@ class AdminController extends Controller
         $jumlahWarga = Warga::count();
         $jumlahBerita = News::count();
 
-        return view('admin.dashboard', compact('jumlahWarga', 'jumlahBerita'));
-    }
+        return view('admin.dashboard', [
+            'jumlahWarga' => Warga::count(),
+            'jumlahBerita' => News::count(),
+            'jumlahJadwal' => JadwalKegiatan::count(),
+            'jumlahPerangkat' => PerangkatDusun::count()
+        ]);    }
 }

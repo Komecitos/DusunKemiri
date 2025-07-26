@@ -1,3 +1,93 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500;
+}
+
+@layer components {
+
+    /* Tombol */
+    .btn-primary {
+        @apply bg-sogan text-white px-4 py-2 rounded-md hover:bg-orange-700 transition font-medium text-sm shadow-sm;
+    }
+
+    .btn-secondary {
+        @apply bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 transition font-medium text-sm shadow-sm;
+    }
+
+    .btn-outline {
+        @apply border border-sogan text-sogan px-4 py-2 rounded-md hover:bg-sogan hover:text-white transition font-medium text-sm;
+    }
+
+    /* Kartu */
+    .card {
+        @apply bg-white rounded-xl shadow-md p-5;
+    }
+
+    .card-soft {
+        @apply bg-kunyit/20 hover:bg-kunyit/30 transition shadow-sm hover:shadow-md rounded-xl p-5 block;
+    }
+
+    /* Judul */
+    .section-title {
+        @apply text-2xl font-bold text-sogan mb-6;
+    }
+
+    .subtitle {
+        @apply text-lg font-semibold text-gray-600 mb-2;
+    }
+
+    /* Form */
+    .form-label {
+        @apply text-sm font-medium text-gray-700 mb-1 block;
+    }
+
+    .form-input {
+        @apply border border-gray-300 rounded-md w-full px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-sogan;
+    }
+
+    .form-textarea {
+        @apply border border-gray-300 rounded-md w-full px-3 py-2 text-sm h-28 resize-none focus:outline-none focus:ring-1 focus:ring-sogan;
+    }
+
+    .form-select {
+        @apply border border-gray-300 rounded-md w-full px-3 py-2 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-sogan;
+    }
+
+    /* Alert / Notifikasi */
+    .alert {
+        @apply p-4 rounded-md text-sm border-l-4;
+    }
+
+    .alert-success {
+        @apply bg-greenSuccess text-green-800 border-green-500;
+    }
+
+    .alert-error {
+        @apply bg-redDanger text-red-800 border-red-500;
+    }
+
+    .alert-warning {
+        @apply bg-yellow-100 text-yellow-800 border-yellow-400;
+    }
+
+    /* Tabel */
+    .table-head {
+        @apply bg-kunyit/20 text-sogan uppercase text-xs font-semibold;
+    }
+
+    .table-row {
+        @apply hover:bg-gray-50 transition text-darkText;
+    }
+
+    .table-cell {
+        @apply px-4 py-3 whitespace-nowrap;
+    }
+
+    /* Loader */
+    .loader {
+        @apply w-6 h-6 border-4 border-sogan border-t-transparent rounded-full animate-spin;
+    }
+}
