@@ -16,16 +16,19 @@
                 <h3 class="font-semibold text-lg text-sogan mb-3">Keterangan</h3>
                 <div class="space-y-3 text-sm text-gray-700">
                     <div class="flex items-center gap-3">
-                        <img src="{{ asset('images/icons/masjid.png') }}" alt="Masjid" class="w-6 h-6"> <span>Masjid</span>
+                        <img src="{{ asset('images/icons/mosque.png') }}" alt="Masjid" class="w-6 h-6"> <span>Masjid</span>
                     </div>
                     <div class="flex items-center gap-3">
-                        <img src="{{ asset('images/icons/office.png') }}" alt="Balai Dusun" class="w-6 h-6"> <span>Balai Dusun</span>
+                        <img src="{{ asset('images/icons/home.png') }}" alt="Home" class="w-6 h-6"> <span>Perangkat Dusun</span>
                     </div>
                     <div class="flex items-center gap-3">
-                        <img src="{{ asset('images/icons/shop.png') }}" alt="Warung" class="w-6 h-6"> <span>Warung</span>
+                        <img src="{{ asset('images/icons/tree-silhouette.png') }}" alt="Pathuk" class="w-6 h-6"> <span>Pathuk</span>
                     </div>
                     <div class="flex items-center gap-3">
-                        <img src="{{ asset('images/icons/default-marker.png') }}" alt="Lainnya" class="w-6 h-6"> <span>Lainnya</span>
+                        <img src="{{ asset('images/icons/school.png') }}" alt="Sekolah" class="w-6 h-6"> <span>Sekolah</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <img src="{{ asset('images/icons/grave (1).png') }}" alt="Kuburan" class="w-6 h-6"> <span>Kuburan</span>
                     </div>
                 </div>
             </div>
@@ -45,74 +48,24 @@
 
 @push('scripts')
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script>
-    const map = L.map('map').setView([-7.8, 110.2001684], 14);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-    // Custom icons
-    const icons = {
-        Masjid: L.icon({
-            iconUrl: @json(asset('images/icons/masjid.png')),
-            iconSize: [36, 36],
-            iconAnchor: [18, 36],
-            popupAnchor: [0, -36],
-        }),
-        Pak_Dukuh: L.icon({
-            iconUrl: @json(asset('images/icons/office.png')),
-            iconSize: [36, 36],
-            iconAnchor: [18, 36],
-            popupAnchor: [0, -36],
-        }),
-        warung: L.icon({
-            iconUrl: @json(asset('images/icons/shop.png')),
-            iconSize: [36, 36],
-            iconAnchor: [18, 36],
-            popupAnchor: [0, -36],
-        }),
-        default: L.icon({
-            iconUrl: @json(asset('images/icons/default-marker.png')),
-            iconSize: [36, 36],
-            iconAnchor: [18, 36],
-            popupAnchor: [0, -36],
-        }),
+    window.dusunMapData = {
+        lokasi: @json($lokasi),
+        iconUrls: {
+            masjid: "{{ asset('images/icons/mosque.png') }}",
+            rumah: "{{ asset('images/icons/home.png') }}",
+            dukuh: "{{ asset('images/icons/home.png') }}",
+            perangkat_desa: "{{ asset('images/icons/home.png') }}",
+            pathuk: "{{ asset('images/icons/tree-silhouette.png') }}",
+            sekolah: "{{ asset('images/icons/school.png') }}",
+            kuburan: "{{ asset('images/icons/grave (1).png') }}",
+        }
     };
-
-    const lokasi = @json($lokasi);
-
-    lokasi.forEach(item => {
-        const icon = icons[item.kategori] || icons.default;
-
-        L.marker([item.latitude, item.longitude], {
-                icon
-            }).addTo(map)
-            .bindPopup(`<div class="text-sm"><strong>${item.nama}</strong><br>${item.keterangan || ''}</div>`);
-    });
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            function(position) {
-                const userLat = position.coords.latitude;
-                const userLng = position.coords.longitude;
-
-                const userMarker = L.marker([userLat, userLng], {
-                        icon: L.icon({
-                            iconUrl: 'https://cdn-icons-png.flaticon.com/512/64/64113.png',
-                            iconSize: [32, 32],
-                            iconAnchor: [16, 32],
-                            popupAnchor: [0, -32]
-                        })
-                    }).addTo(map)
-                    .bindPopup("Lokasi Anda Saat Ini")
-                    .openPopup();
-
-                map.setView([userLat, userLng], 15);
-            },
-            function(error) {
-                console.warn("Lokasi tidak bisa diakses:", error.message);
-            }
-        );
-    } else {
-        alert("Browser Anda tidak mendukung geolokasi.");
-    }
 </script>
+
+
+
+<script src="{{ asset('js/peta.js') }}"></script>
+
 @endpush

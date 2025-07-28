@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container py-8 px-4 md:px-10 lg:px-20 mb-8 font-sans">
-    <h2 class="text-2xl font-bold text-sogan mb-6">Statistik Penduduk Dusun Kemiri</h2>
+<div class="container pt-5 ml-12 lg-20 mb-8 font-sans">
+    <h2 class="text-2xl font-bold text-sogan mb-10">Statistik Penduduk <span class="text-orange-700 font-serif tracking-widest">Dusun Kemiri</span></h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-10">
         <div class="bg-white border-l-4 border-kunyit shadow-md rounded-2xl p-5">
@@ -49,7 +49,7 @@
     </div>
 
     <div class="py-4">
-        <h3 class="text-xl font-semibold mb-4">Data Pekerjaan Warga</h3>
+        <h3 class="text-xl font-semibold mb-6">Data Pekerjaan Warga</h3>
         <div class="grid md:grid-cols-2 gap-6 items-start">
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border border-kunyit rounded-xl shadow">
@@ -77,7 +77,7 @@
         </div>
     </div>
 
-    <div class="py-4">
+    <div class="">
         <h3 class="text-xl font-semibold mb-4">Data Pendidikan Terakhir</h3>
         <div class="overflow-x-auto">
             <canvas id="pendidikanChart" class="w-full max-h-[400px]"></canvas>

@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
+    <!-- <meta http-equiv="refresh" content="10"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Dusun Kemiri')</title>
-    <link rel="icon" href="{{ asset(path: 'images/icons/apple-tab.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset(path: 'images/icons/dk.png') }}" type="image/x-icon">
 
     {{-- Google Fonts --}}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -27,6 +28,13 @@
             font-family: 'Inter', 'Roboto', sans-serif;
         }
     </style>
+    <script>
+        document.addEventListener("visibilitychange", function() {
+            if (document.visibilityState === 'visible') {
+                location.reload();
+            }
+        });
+    </script>
 
     @stack('styles')
 </head>
@@ -35,7 +43,7 @@
 
     {{-- Navbar --}}
     <header class="bg-white shadow sticky top-0 z-50" x-data="{ open: false }">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-10 py-4 flex items-center justify-between">
             <a href="{{ url('/') }}" class="flex items-center space-x-3">
                 <!-- <img src="{{ asset('images/headbar/logo01.jpeg') }}" alt="Logo Dusun" class="w-10 h-10 rounded-full border border-kunyit shadow"> -->
                 <span class="text-xl font-bold text-sogan font-serif tracking-widest">Dusun Kemiri</span>
@@ -53,7 +61,7 @@
 
             {{-- Login Desktop --}}
             <div class="hidden md:block text-sm">
-                <a href="{{ url('/login-admin') }}" class="text-sogan hover:text-kunyit font-semibold transition duration-150">Login Admin</a>
+                <a href="{{ route('admin.login') }}"  class="text-sogan hover:text-kunyit font-semibold transition duration-150">Login Admin</a>
             </div>
 
             {{-- Hamburger Mobile --}}
@@ -77,55 +85,61 @@
             <a href="{{ url('/demografi') }}" class="block px-4 py-2 rounded-md text-sogan hover:bg-orange-100">Demografi</a>
             <a href="{{ url('/jadwal') }}" class="block px-4 py-2 rounded-md text-sogan hover:bg-orange-100">Kegiatan</a>
             <a href="{{ url('/peta-dusun') }}" class="block px-4 py-2 rounded-md text-sogan hover:bg-orange-100">Peta Dusun</a>
-            <a href="{{ url('/login-admin') }}" class="block px-4 py-2 rounded-md text-kunyit hover:bg-orange-100">Login Admin</a>
+            <a href="{{ route('admin.login') }}" class="block px-4 py-2 rounded-md text-kunyit hover:bg-orange-100">Login Admin</a>
         </nav>
     </header>
 
     {{-- Main --}}
-    <main class="{{ Route::currentRouteName() === 'home' ? 'pb-10' : 'px-4 py-6 md:px-12' }}">
+    <main class="{{ Route::currentRouteName() === 'home' ? 'pb-10' : (Route::currentRouteName() === 'admin.login' ? 'pb-0' : 'px-4 py-6 md:px-12 mb-10') }}">
         @yield('content')
     </main>
 
 
     {{-- Footer --}}
-    <footer class="bg-sogan text-white py-10 px-4 md:px-16 mt-10">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-center md:justify-between items-start gap-10">
-            <div class="flex items-start gap-4">
-                <!-- <img src="{{ asset('images/headbar/logo01.jpeg') }}" alt="Logo" class="w-20 h-auto border border-white rounded-md shadow"> -->
-                <div>
-                    <h2 class="text-xl font-bold mb-2">Dusun Kemiri</h2>
-                    <p>Kalurahan Keliagung, Kecamatan Sentolo,</p>
-                    <p>Kabupaten Kulon Progo</p>
-                    <p>Daerah Istimewa Yogyakarta</p>
+    <footer class="relative text-white">
+        <div class="absolute inset-0 bg-[url('images/headbar/footer-bg-min.png')] bg-cover bg-center"></div>
+        <div class="absolute inset-0 bg-sogan/100"></div>
+        <div class="relative py-10 px-4 md:px-16">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-center md:justify-between items-start gap-10">
+                <div class="flex items-start gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold mb-2 font-serif tracking-widest">Dusun Kemiri</h2>
+                        <p>Kalurahan Keliagung, Kecamatan Sentolo,</p>
+                        <p>Kabupaten Kulon Progo</p>
+                        <p>Daerah Istimewa Yogyakarta</p>
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <h2 class="text-xl font-bold mb-4">Hubungi Kami</h2>
-                <div class="flex items-center gap-3 mb-2">
-                    <i class="fas fa-phone text-xl"></i>
-                    <span>+62 xxx xxxx xxxx</span>
-                </div>
-                <div class="flex items-center gap-3 mb-2">
-                    <i class="fas fa-envelope text-xl"></i>
-                    <span>emaildusun@example.com</span>
-                </div>
-                <div class="flex gap-4 mt-4 text-2xl">
-                    <a href="#"><i class="fab fa-instagram hover:text-kunyit"></i></a>
-                    <a href="#"><i class="fab fa-facebook hover:text-kunyit"></i></a>
-                    <a href="#"><i class="fab fa-x-twitter hover:text-kunyit"></i></a>
-                    <a href="#"><i class="fab fa-youtube hover:text-kunyit"></i></a>
-                    <a href="#"><i class="fab fa-tiktok hover:text-kunyit"></i></a>
+                <div>
+                    <h2 class="text-xl font-bold mb-4">Hubungi Kami</h2>
+                    <div class="flex items-center gap-3 mb-2">
+                        <i class="fas fa-phone text-xl"></i>
+                        <span>+62 xxx xxxx xxxx</span>
+                    </div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <i class="fas fa-envelope text-xl"></i>
+                        <span>emaildusun@example.com</span>
+                    </div>
+                    <div class="flex gap-4 mt-4 text-2xl">
+                        <a href="#" target="_blank"><i class="fab fa-instagram hover:text-kunyit cursor-not-allowed"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-facebook hover:text-kunyit cursor-not-allowed"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-x-twitter hover:text-kunyit cursor-not-allowed"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-youtube hover:text-kunyit cursor-not-allowed"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-tiktok hover:text-kunyit cursor-not-allowed"></i></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="text-center text-sm mt-6">
-            &copy; 2025 Website Resmi Dusun Kemiri<br>
-            Dikembangkan sebagai Proker Individu KKN 70 oleh Mahasiswa Universitas Sanata Dharma.
+            <div class="text-center text-sm mt-6">
+                &copy; 2025 Website Resmi Dusun Kemiri<br>
+                <p class="text-xs text-white/60 italic mt-1">
+                    Dikembangkan oleh <a href="https://instagram.com/galiga_27" target="_blank">Irga Prayoga</a> • Mahasiswa Universitas Sanata Dharma • KKN 70 | 2025
+                </p>
+            </div>
         </div>
     </footer>
 
     @stack('scripts')
 </body>
+
 
 </html>

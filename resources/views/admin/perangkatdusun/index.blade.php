@@ -3,8 +3,7 @@
 @section('title', 'Manajemen Perangkat Dusun')
 
 @section('content')
-<div class="max-w-6xl mx-auto px-4 py-6 font-roboto">
-    <h1 class="text-2xl font-bold text-sogan mb-6">Manajemen Perangkat Dusun</h1>
+<div class="">
 
     @if(session('success'))
     <div class="bg-green-100 text-green-800 border border-green-300 rounded p-3 mb-4">
@@ -12,16 +11,18 @@
     </div>
     @endif
 
-    <div class="flex justify-end mb-4">
-        <a href="{{ route('admin.perangkat.create') }}"
-            class="bg-kunyit hover:bg-[#c69058] text-white font-semibold py-2 px-4 rounded-xl shadow">
-            + Tambah Perangkat
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-xl font-bold text-sogan">Manajemen Perangkat Dusun</h1>
+
+        <a href=" {{ route('admin.perangkat.create') }}"
+            class="bg-sogan text-white hover:bg-kunyit/80 hover:text-sogan  px-4 py-2 rounded text-sm font-medium shadow transition">
+            Tambah Perangkat
         </a>
     </div>
 
-    <div class="overflow-x-auto bg-white rounded-xl shadow border border-kunyit">
-        <table class="min-w-full text-sm text-gray-800">
-            <thead class="bg-[#fffaf3] text-sogan border-b border-kunyit">
+    <div class="overflow-x-auto bg-white border border-gray-200 rounded-xl shadow-sm">
+        <table class="w-full text-sm text-left">
+            <thead class="bg-kunyit/10 text-sogan uppercase text-xs font-semibold">
                 <tr>
                     <th class="px-4 py-3 text-left">Jabatan</th>
                     <th class="px-4 py-3 text-left">Nama</th>
@@ -41,14 +42,14 @@
                     <td class="px-4 py-2">{{ $item->alamat }}</td>
                     <td class="px-4 py-2 space-x-2">
                         <a href="{{ route('admin.perangkat.edit', $item->id) }}"
-                            class="text-blue-600 hover:underline">Edit</a>
+                            class="text-sogan hover:underline text-sm font-medium">Edit</a>
                         <form action="{{ route('admin.perangkat.destroy', $item->id) }}"
                             method="POST"
                             class="inline-block"
                             onsubmit="return confirm('Yakin ingin menghapus?')">
                             @csrf
                             @method('DELETE')
-                            <button class="text-red-600 hover:underline">Hapus</button>
+                            <button class="text-red-600 hover:underline text-sm font-medium">Hapus</button>
                         </form>
                     </td>
                 </tr>

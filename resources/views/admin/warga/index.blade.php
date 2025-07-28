@@ -10,8 +10,8 @@ $newDir = $currentDir === 'asc' ? 'desc' : 'asc';
 <div class="flex justify-between items-center mb-6">
     <h2 class="text-xl font-bold text-sogan">Data Warga Dusun</h2>
     <a href="{{ route('admin.warga.create') }}"
-        class="bg-kunyit hover:bg-kunyit/80 text-white px-4 py-2 rounded-lg text-sm font-medium shadow transition">
-        + Tambah Warga
+        class="bg-sogan hover:bg-kunyit/80 text-white px-4 py-2 rounded text-sm font-medium shadow transition">
+        Tambah Warga
     </a>
 </div>
 
@@ -27,7 +27,12 @@ $newDir = $currentDir === 'asc' ? 'desc' : 'asc';
         <option value="nama" {{ request('filter') == 'nama' ? 'selected' : '' }}>Nama</option>
         <option value="nik" {{ request('filter') == 'nik' ? 'selected' : '' }}>NIK</option>
         <option value="pekerjaan" {{ request('filter') == 'pekerjaan' ? 'selected' : '' }}>Pekerjaan</option>
-        <option value="dusun" {{ request('filter') == 'dusun' ? 'selected' : '' }}>Dusun</option>
+        <option value="rt" {{ request('filter') == 'rt' ? 'selected' : '' }}>RT</option>
+        <option value="rw" {{ request('filter') == 'rw' ? 'selected' : '' }}>RW</option>
+        <option value="agama" {{ request('filter') == 'agama' ? 'selected' : '' }}>Agama</option>
+        <option value="pendidikan_terakhir" {{ request('filter') == 'pendidikan_terakhir' ? 'selected' : '' }}>Pendidikan</option>
+        <option value="golongan_darah" {{ request('filter') == 'golongan_darah' ? 'selected' : '' }}>Golongan darah</option>
+
     </select>
 
     <div class="relative">
@@ -41,7 +46,7 @@ $newDir = $currentDir === 'asc' ? 'desc' : 'asc';
     </div>
 
     <button type="submit"
-        class="bg-kunyit hover:bg-kunyit/80 text-white px-4 py-2 rounded-lg text-sm font-medium shadow transition">
+        class="bg-sogan hover:bg-kunyit/80 text-white px-4 py-2 rounded-lg text-sm font-medium shadow transition">
         Cari
     </button>
 </form>
@@ -50,7 +55,18 @@ $newDir = $currentDir === 'asc' ? 'desc' : 'asc';
     <table class="w-full text-sm text-left">
         <thead class="bg-kunyit/10 text-sogan uppercase text-xs font-semibold">
             <tr>
-                @foreach (['nama' => 'Nama', 'nik' => 'NIK', 'jenis_kelamin' => 'Jenis Kelamin', 'pekerjaan' => 'Pekerjaan'] as $key => $label)
+                @foreach ([
+                'nama' => 'Nama',
+                'jenis_kelamin' => 'Jenis Kelamin',
+                'pekerjaan' => 'Pekerjaan',
+                'pendidikan_terakhir' => 'Pendidikan',
+                'agama' => 'Agama',
+                'golongan_darah' => 'Gol. Darah',
+                'status_perkawinan' => 'Status',
+                'kategori_penduduk' => 'Kategori',
+                'rt' => 'RT',
+                'rw' => 'RW'
+                ] as $key => $label)
                 <th class="px-4 py-3 whitespace-nowrap">
                     <a href="{{ route('admin.warga', ['sort' => $key, 'direction' => $currentSort === $key ? $newDir : 'asc'] + request()->except(['sort', 'direction', 'page'])) }}"
                         class="hover:underline">
@@ -65,14 +81,21 @@ $newDir = $currentDir === 'asc' ? 'desc' : 'asc';
             @forelse ($wargas as $warga)
             <tr class="hover:bg-gray-50 transition">
                 <td class="px-4 py-3">{{ $warga->nama }}</td>
-                <td class="px-4 py-3">{{ $warga->nik }}</td>
                 <td class="px-4 py-3">{{ $warga->jenis_kelamin }}</td>
                 <td class="px-4 py-3">{{ $warga->pekerjaan }}</td>
+                <td class="px-4 py-3">{{ $warga->pendidikan_terakhir }}</td>
+                <td class="px-4 py-3">{{ $warga->agama }}</td>
+                <td class="px-4 py-3">{{ $warga->golongan_darah }}</td>
+                <td class="px-4 py-3">{{ $warga->status_perkawinan }}</td>
+                <td class="px-4 py-3">{{ $warga->kategori_penduduk }}</td>
+                <td class="px-4 py-3">{{ $warga->rt }}</td>
+                <td class="px-4 py-3">{{ $warga->rw }}</td>
+
                 <td class="px-4 py-3 text-center space-x-2 whitespace-nowrap">
                     <a href="{{ route('admin.warga.show', $warga->id) }}"
-                        class="text-kunyit hover:underline text-sm font-medium">Lihat</a>
+                        class="text-sogan hover:underline text-sm font-medium">Lihat</a>
                     <a href="{{ route('admin.warga.edit', $warga->id) }}"
-                        class="text-blue-600 hover:underline text-sm font-medium">Edit</a>
+                        class="text-sogan hover:underline text-sm font-medium">Edit</a>
                     <form action="{{ route('admin.warga.destroy', $warga->id) }}" method="POST" class="inline"
                         onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                         @csrf

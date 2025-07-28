@@ -29,7 +29,7 @@ class CarouselController extends Controller
     {
         // Validasi input dari form
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
             'text' => 'nullable|string',
             'image' => 'required|image|mimes:jpg,jpeg,png|max:4096',
         ]);

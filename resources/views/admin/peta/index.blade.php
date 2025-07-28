@@ -3,21 +3,20 @@
 @section('title', 'Daftar Marker Peta')
 
 @section('content')
-<div class="max-w-6xl mx-auto px-4 py-6 font-roboto">
-    <h2 class="text-2xl font-bold text-sogan mb-6">Daftar Marker Peta Dusun</h2>
+<div class="">
 
-    {{-- Tombol Tambah --}}
-    <div class="mb-4">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-bold text-sogan">Daftar Marker Peta Dusun</h2>
         <a href="{{ route('admin.petadusun.create') }}"
-            class="bg-kunyit hover:bg-[#c69058] text-white px-4 py-2 rounded-xl shadow transition text-sm font-semibold">
-            + Tambah Marker
+            class="bg-sogan hover:bg-kunyit/80 text-white px-4 py-2 rounded text-sm font-medium shadow transition">
+            Tambah Marker
         </a>
     </div>
 
     {{-- Tabel --}}
-    <div class="overflow-x-auto rounded-xl shadow border border-kunyit bg-white">
-        <table class="min-w-full table-auto text-sm">
-            <thead class="bg-kunyit/20 text-sogan font-semibold">
+    <div class="overflow-x-auto bg-white border border-gray-200 rounded-xl shadow-sm">
+        <table class="w-full text-sm text-left">
+            <thead class="bg-kunyit/10 text-sogan uppercase text-xs font-semibold">
                 <tr>
                     <th class="px-4 py-3 border-b border-kunyit">Nama Lokasi</th>
                     <th class="px-4 py-3 border-b border-kunyit">Latitude</th>
@@ -35,7 +34,7 @@
                     <td class="px-4 py-3 border-b border-gray-200">{{ $marker->keterangan }}</td>
                     <td class="px-4 py-3 border-b border-gray-200 text-center space-x-2">
                         <a href="{{ route('admin.petadusun.edit', $marker->id) }}"
-                            class="inline-block bg-kunyit hover:bg-[#b57d49] text-white px-3 py-1 rounded text-xs font-semibold">
+                            class="text-sogan hover:underline text-sm font-medium">
                             Edit
                         </a>
                         <form action="{{ route('admin.petadusun.destroy', $marker->id) }}" method="POST"
@@ -44,7 +43,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit"
-                                class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-semibold">
+                                class="text-red-600 hover:underline text-sm font-medium">
                                 Hapus
                             </button>
                         </form>

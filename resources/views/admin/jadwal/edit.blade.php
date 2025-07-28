@@ -3,8 +3,8 @@
 @section('title', 'Edit Jadwal')
 
 @section('content')
-<div class="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow text-sogan font-roboto">
-    <h2 class="text-2xl font-bold text-orange-700 mb-6">Edit Jadwal Kegiatan</h2>
+<div class="max-w-3xl mx-auto bg-white shadow rounded-2xl p-6 font-roboto border border-sogan/30">
+    <h2 class="text-2xl font-bold text-sogan mb-6">Edit Jadwal Kegiatan</h2>
 
     @if ($errors->any())
     <div class="mb-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded">
@@ -57,9 +57,9 @@
 
         <div class="flex justify-between mt-6">
             <a href="{{ route('admin.jadwal.index') }}"
-                class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition">← Kembali</a>
+                class="bg-sogan hover:bg-kunyit hover:text-sogan text-white px-6 py-2 rounded shadow transition">Kembali</a>
             <button type="submit"
-                class="px-6 py-2 bg-kunyit hover:bg-yellow-500 text-black font-semibold rounded transition">Update</button>
+                class="bg-sogan hover:bg-kunyit hover:text-sogan text-white px-6 py-2 rounded shadow transition">Update</button>
         </div>
     </form>
 </div>

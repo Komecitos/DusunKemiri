@@ -12,7 +12,6 @@ class WargaController extends Controller
 {
     public function index(Request $request)
     {
-
         $query = \App\Models\Warga::query();
 
         // Pencarian
@@ -25,16 +24,31 @@ class WargaController extends Controller
         // Sortir
         $sort = $request->input('sort', 'nama');
         $direction = $request->input('direction', 'asc');
-        if (in_array($sort, ['nama', 'nik','no_kk', 'pekerjaan', 'jenis_kelamin']) && in_array($direction, ['asc', 'desc'])) {
+
+        $allowedSorts = [
+            'nama',
+            'nik',
+            'no_kk',
+            'pekerjaan',
+            'jenis_kelamin',
+            'rt',
+            'rw',
+            'kategori_penduduk',
+            'agama',
+            'pendidikan_terakhir',
+            'golongan_darah',
+            'status_perkawinan',
+        ];
+
+        if (in_array($sort, $allowedSorts) && in_array($direction, ['asc', 'desc'])) {
             $query->orderBy($sort, $direction);
         }
 
         $wargas = $query->paginate(10);
 
-
-
         return view('admin.warga.index', compact('wargas'));
     }
+
 
 
     public function edit($id)
@@ -47,8 +61,8 @@ class WargaController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:100',
-            'no_kk' => 'required|string|max:20',
-            'nik' => 'required|string|max:20nik',
+            'no_kk' => 'required|string|max:16',
+            'nik' => 'required|string|max:16',
             'status_KK' => 'required',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:L,P',

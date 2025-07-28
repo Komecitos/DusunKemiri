@@ -3,22 +3,22 @@
 @section('title', 'Jadwal Kegiatan')
 
 @section('content')
-<div class="max-w-6xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg">
-    <h2 class="text-2xl md:text-3xl font-bold text-sogan mb-6">Daftar Jadwal Kegiatan</h2>
+<div class="">
 
     {{-- Tombol Tambah --}}
-    <div class="mb-4 flex justify-end">
+    <div class="mb-6 flex justify-between items-center">
+        <h2 class="text-xl font-bold text-sogan">Jadwal Kegiatan Dusun</h2>
         <a href="{{ route('admin.jadwal.create') }}"
-            class="bg-kunyit text-white px-4 py-2 rounded-xl hover:bg-[#c69058] transition">
-            + Tambah Jadwal
+            class="bg-sogan hover:bg-kunyit hover:text-sogan text-white px-4 py-2 rounded text-sm font-medium shadow transition">
+            Tambah Jadwal
         </a>
     </div>
 
     @if ($jadwal->count())
     {{-- Tabel Jadwal --}}
-    <div class="overflow-x-auto rounded-xl shadow border border-kunyit">
-        <table class="min-w-full text-sm md:text-base bg-white">
-            <thead class="bg-kunyit/20 text-sogan">
+    <div class="overflow-x-auto bg-white border border-gray-200 rounded-xl shadow-sm">
+        <table class="w-full text-sm text-left">
+            <thead class="bg-kunyit/10 text-sogan uppercase text-xs font-semibold">
                 <tr>
                     <th class="px-4 py-3 border-b border-kunyit">Judul</th>
                     <th class="px-4 py-3 border-b border-kunyit">Waktu Mulai</th>
@@ -41,13 +41,13 @@
                     <td class="px-4 py-3 border-b border-gray-200 text-center">
                         <div class="flex justify-center gap-2">
                             <a href="{{ route('admin.jadwal.edit', $j->id) }}"
-                                class="bg-kunyit text-white px-3 py-1 rounded-md text-xs hover:bg-[#b57d49]">Edit</a>
+                                class="text-sogan hover:underline text-sm font-medium">Edit</a>
                             <form action="{{ route('admin.jadwal.destroy', $j->id) }}" method="POST"
                                 onsubmit="return confirm('Hapus jadwal ini?')" class="inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md text-xs">
+                                    class="text-red-600 hover:underline text-sm font-medium">
                                     Hapus
                                 </button>
                             </form>

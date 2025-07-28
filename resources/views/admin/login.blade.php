@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
-    <div class="max-w-md w-full bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-        <h2 class="text-2xl font-bold text-center text-sogan-600 font-sans mb-6">Login Admin</h2>
+<div class="min-h-screen w-full flex items-center justify-center bg-cover bg-center"
+    style="background-image: url('{{ asset('images/profil/IMG_3405-min.JPG') }}')">
+    <div class="w-80 bg-white bg-opacity-100 p-6 rounded-xl shadow-lg border border-gray-200">
+        <h2 class="text-xl font-bold text-center text-sogan-600 font-sans mb-5">Login Admin</h2>
 
         @if (session('error'))
         <div class="bg-red-100 text-red-700 px-4 py-2 rounded mb-4 text-sm">
@@ -11,23 +12,21 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('admin.login.submit') }}" target="_blank">
             @csrf
 
             <div class="mb-4">
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <label for="email" class="block text-sm font-medium text-sogan mb-1">Email</label>
                 <input type="email" name="email" id="email" required autofocus
-                    class="w-full px-4 py-2 border border-kunyit rounded-md shadow-sm focus:ring-kunyit focus:border-kunyit text-gray-800"
+                    class="w-full px-3 py-2 border border-kunyit rounded-md shadow-sm focus:ring-kunyit focus:border-kunyit text-gray-800 outline-none"
                     value="{{ old('email') }}">
             </div>
 
-            <div class="mb-6 relative">
-                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <div class="mb-5 relative">
+                <label for="password" class="block text-sm font-medium text-sogan mb-1">Password</label>
                 <input type="password" name="password" id="password" required
-                    class="w-full px-4 py-2 border border-kunyit rounded-md shadow-sm focus:ring-kunyit focus:border-kunyit text-gray-800 pr-10">
-
-                {{-- Tombol toggle password --}}
-                <button type="button" onclick="togglePassword()" class="absolute right-3 top-9 text-gray-500">
+                    class="w-full px-3 py-2 border border-kunyit rounded-md shadow-sm focus:ring-kunyit focus:border-kunyit text-gray-800 pr-10 outline-none">
+                <button type="button" onclick="togglePassword()" class="absolute right-3 top-8 text-sogan">
                     <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -38,12 +37,11 @@
                 </button>
             </div>
 
-            <div class="flex items-center justify-between mb-6 text-sm">
+            <div class="flex items-center justify-between mb-5 text-sm">
                 <label class="flex items-center">
                     <input type="checkbox" name="remember" class="form-checkbox text-kunyit">
                     <span class="ml-2 text-gray-700">Ingat saya</span>
                 </label>
-                {{-- <a href="{{ route('password.request') }}" class="text-orange-500 hover:underline">Lupa Password?</a> --}}
             </div>
 
             <button type="submit"

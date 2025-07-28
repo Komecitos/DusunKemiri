@@ -3,28 +3,36 @@
 @section('title', 'Daftar Berita')
 
 @section('content')
-<h1 class="text-2xl md:text-3xl font-extrabold text-sogan mb-6">Daftar Berita Dusun</h1>
 
 {{-- Tombol Tambah --}}
-<div class="mb-4">
+<div class="flex justify-between items-center mb-6">
+    <h2 class="text-xl font-bold text-sogan">Daftar Berita Dusun</h2>
     <a href="{{ route('admin.berita.create') }}"
-        class="bg-kunyit text-white px-4 py-2 rounded-xl shadow hover:bg-[#c69058] transition">
-        + Tambah Berita
-    </a>
+        class="bg-sogan hover:bg-kunyit/80 text-white px-4 py-2 rounded text-sm font-medium shadow transition">
+        Tambah Berita
+    </a>    
 </div>
 
 {{-- Form Pencarian --}}
 <form method="GET" class="flex flex-col md:flex-row gap-3 mb-6">
-    <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="Cari berdasarkan judul..."
-        class="w-full md:w-1/2 border border-kunyit text-sogan px-4 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-kunyit focus:border-kunyit" />
+    <select name="kategori" class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-kunyit focus:border-kunyit focus:outline-none">
+        <option value="judul" {{ request('kategori') == 'judul' ? 'selected' : '' }}>Judul</option>
+        <option value="penulis" {{ request('kategori') == 'penulis' ? 'selected' : '' }}>Penulis</option>
+        <option value="tanggal" {{ request('kategori') == 'tanggal' ? 'selected' : '' }}>Tanggal</option>
+    </select>
+
+    <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="Masukkan kata kunci..."
+        class="border border-gray-300 rounded-md px-3 py-2 w-64 text-sm pr-8 focus:ring-kunyit focus:border-kunyit focus:outline-none" />
+
     <button type="submit"
-        class="bg-sogan text-white px-4 py-2 rounded-xl hover:bg-[#4a3329] transition">Cari</button>
+        class="bg-sogan text-white px-4 py-2 rounded hover:bg-kunyit transition">Cari</button>
 </form>
 
+
 {{-- Tabel Berita --}}
-<div class="overflow-x-auto rounded-xl shadow">
-    <table class="min-w-full text-sm md:text-base bg-white border border-kunyit rounded-xl overflow-hidden">
-        <thead class="bg-kunyit/20 text-sogan text-left">
+<div class="overflow-x-auto bg-white border border-gray-200 rounded-xl shadow-sm">
+    <table class="w-full text-sm text-left">
+        <thead class="bg-kunyit/10 text-sogan uppercase text-xs font-semibold">
             <tr>
                 <th class="px-4 py-3 border-b border-kunyit">Judul</th>
                 <th class="px-4 py-3 border-b border-kunyit">Penulis</th>
@@ -40,13 +48,13 @@
                 <td class="px-4 py-3 border-b border-gray-200">{{ $b->created_at->format('d M Y') }}</td>
                 <td class="px-4 py-3 border-b border-gray-200 text-center space-x-1">
                     <a href="{{ route('admin.berita.edit', $b->id) }}"
-                        class="bg-kunyit text-white px-3 py-1 rounded-md hover:bg-[#b57d49] text-sm">Edit</a>
+                        class="text-sogan hover:underline text-sm font-medium">Edit</a>
                     <form action="{{ route('admin.berita.destroy', $b->id) }}" method="POST" class="inline"
                         onsubmit="return confirm('Hapus berita ini?')">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
-                            class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md text-sm">Hapus</button>
+                            class="text-red-600 hover:underline text-sm font-medium">Hapus</button>
                     </form>
                 </td>
             </tr>

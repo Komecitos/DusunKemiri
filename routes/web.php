@@ -5,7 +5,6 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Log;
 
-
 // Public Controllers
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\BeritaController as PublicBeritaController;
@@ -23,13 +22,12 @@ use App\Http\Controllers\Admin\PetaDusunController as AdminPetaDusunController;
 use App\Http\Controllers\Admin\PerangkatDusunController as AdminPerangkatDusunController;
 use App\Http\Controllers\Admin\ProfilDusunController as AdminProfilDusunController;
 use App\Http\Controllers\Admin\WargaController as AdminWargaController;
-
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', fn() => view('home'));
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/dashboard', fn() => view('dashboard'))->middleware(['auth', 'verified'])->name('dashboard');
 
 // === Public Routes ===
 Route::get('/berita', [PublicBeritaController::class, 'index'])->name('berita.index');
@@ -62,10 +60,10 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 
 // === Admin Routes ===
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/admin/login', [AdminController::class, 'showLogin'])->name('admin.login');
+    Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
 
-    Log::debug('Memuat route /warga dengan ID: ' . request()->route('id'));
-
+    Route::GET('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
     // Warga
     Route::get('/warga', [AdminWargaController::class, 'index'])->name('warga');

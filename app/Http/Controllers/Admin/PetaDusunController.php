@@ -25,7 +25,8 @@ class PetadusunController extends Controller
             'nama' => 'required',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
-            'keterangan' => 'nullable|string'
+            'keterangan' => 'nullable|string',
+            'kategori' => 'nullable|string',
         ]);
 
         Petadusun::create($request->all());

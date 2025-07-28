@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 py-10">
+<div class="max-w-7xl mx-auto px-4 py-10 pt-2">
     <h2 class="text-2xl md:text-3xl font-bold text-sogan text-center mb-0">
-        Berita <span class="text-orange-700">Dusun Kemiri</span>
+        Berita <span class="text-orange-700 font-serif tracking-widest">Dusun Kemiri</span>
     </h2>
 
     <!-- Form Pencarian -->
@@ -49,7 +49,7 @@
                     {!! Str::limit($b->isi, 200) !!}
                 </div>
                 <a href="{{ route('berita.show', $b->slug) }}"
-                    class="inline-block mt-auto text-sm bg-kunyit text-sogan px-4 py-2 rounded hover:bg-opacity-90 transition duration-200 font-medium text-center">
+                    class="inline-block mt-auto text-sm bg-sogan text-white px-4 py-2 rounded hover:bg-opacity-90 transition duration-200 font-medium text-center">
                     Baca Selengkapnya
                 </a>
             </div>

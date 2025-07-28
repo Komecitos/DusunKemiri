@@ -16,14 +16,23 @@ class BeritaController extends Controller
     {
         $query = News::query();
 
-        if ($request->has('keyword')) {
-            $query->where('judul', 'LIKE', '%' . $request->keyword . '%');
+        if ($request->filled('keyword')) {
+            $kategori = $request->input('kategori', 'judul'); 
+
+            if ($kategori === 'penulis') {
+                $query->where('penulis', 'like', '%' . $request->keyword . '%');
+            } elseif ($kategori === 'tanggal') {
+                $query->whereDate('created_at', $request->keyword);
+            } else {
+                $query->where('judul', 'like', '%' . $request->keyword . '%');
+            }
         }
 
-        $berita = $query->orderBy('created_at', 'desc')->paginate(10);
+        $berita = $query->latest()->paginate(10);
 
         return view('admin.news.index', compact('berita'));
     }
+
 
     public function create()
     {

@@ -3,6 +3,7 @@
 @section('content')
 <div class="max-w-3xl mx-auto bg-white shadow rounded-2xl p-6 font-roboto border border-sogan/30">
     <h2 class="text-2xl font-bold text-sogan mb-6">Tambah Berita Dusun</h2>
+    <a href="{{ route('admin.berita.index') }}" class="bg-sogan hover:bg-kunyit hover:text-sogan text-white px-6 py-2 rounded shadow transition">Kembali</a>
 
     @if ($errors->any())
     <div class="mb-4 p-4 bg-red-100 text-red-700 border border-red-300 rounded">
@@ -48,9 +49,8 @@
             <input type="text" name="keterangan_gambar" class="input" value="{{ old('keterangan_gambar') }}">
         </div>
 
-        <div class="flex justify-between pt-4">
-            <a href="{{ route('admin.berita.index') }}" class="bg-sogan/20 text-sogan px-4 py-2 rounded hover:bg-sogan/30 transition">← Kembali</a>
-            <button type="submit" class="bg-kunyit text-white hover:bg-kunyit/90 font-semibold px-6 py-2 rounded transition">Simpan</button>
+        <div class="md:col-span-2 flex justify-end mt-6 ">
+            <button type="submit" class="bg-sogan hover:bg-kunyit hover:text-sogan text-white px-6 py-2 rounded shadow transition">Simpan</button>
         </div>
     </form>
 </div>

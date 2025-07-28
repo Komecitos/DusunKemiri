@@ -1,42 +1,44 @@
 @extends('layouts.admin')
 
 @section('content')
-<h2 class="text-xl font-bold mb-4 text-sogan">Manajemen Carousel</h2>
 
-<a href="{{ route('admin.carousel.create') }}" class="bg-kunyit text-white px-4 py-2 rounded">Tambah Slide</a>
+<div class="flex justify-between items-center mb-6">
+    <h2 class="text-xl font-bold text-sogan">Manajemen Carousel</h2>
+    <a href="{{ route('admin.carousel.create') }}"
+        class="bg-sogan text-white hover:bg-kunyit/80 hover:text-sogan  px-4 py-2 rounded text-sm font-medium shadow transition">
+        + Tambah Slide
+    </a>
+</div>
 
-<table class="mt-4 w-full table-auto border">
-    <thead>
-        <tr class="bg-gray-100">
-            <th class="p-2">Gambar</th>
-            <th class="p-2">Judul</th>
-            <th class="p-2">Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($carousels as $item)
-        <tr class="border-t">
-            <td class="p-2"><img src="{{ asset('storage/' . $item->image) }}" class="h-16"></td>
-            <td class="p-2">{{ $item->title }}</td>
-            <td class="p-2 space-x-2">
-                <a href="{{ route('admin.carousel.edit', $item) }}" class="text-blue-600">Edit</a>
-                <form action="{{ route('admin.carousel.destroy', $item) }}" method="POST" class="inline">
-                    @csrf @method('DELETE')
-                    <button onclick="return confirm('Yakin hapus slide?')" class="text-red-600">Hapus</button>
-                </form>
-            </td>
-            <td>
-                <form action="{{ route('admin.carousels.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus slide ini?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm">
-                        Hapus
-                    </button>
-                </form>
-
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+<div class="overflow-x-auto bg-white border border-gray-200 rounded-xl shadow-sm">
+    <table class="w-full text-sm text-left">
+        <thead class="bg-kunyit/10 text-sogan uppercase text-xs font-semibold">
+            <tr>
+                <th class="px-4 py-3 text-left text-sm font-semibold tracking-wider">Gambar</th>
+                <th class="px-4 py-3 text-left text-sm font-semibold tracking-wider">Judul</th>
+                <th class="px-4 py-3 text-left text-sm font-semibold tracking-wider">Text</th>
+                <th class="px-4 py-3 text-left text-sm font-semibold tracking-wider">Aksi</th>
+            </tr>
+        </thead>
+        <tbody class="">
+            @foreach($carousels as $item)
+            <tr class="border-b border-gray-200 hover:bg-orange-50">
+                <td class="px-4 py-2">
+                    <img src="{{ asset('storage/' . $item->image) }}" class="h-16 w-auto rounded shadow border border-gray-300" alt="Slide">
+                </td>
+                <td class="px-4 py-2 text-sogan font-medium">{{ $item->title }}</td>
+                <td class="px-4 py-2 text-sogan font-medium">{{ $item->text }}</td>
+                <td class="px-4 py-2 space-x-2">
+                    <form action="{{ route('admin.carousel.destroy', $item) }}" method="POST" class="inline">
+                        @csrf @method('DELETE')
+                        <button type="submit"
+                            onclick="return confirm('Yakin ingin menghapus slide ini?');"
+                            class="text-red-600 hover:underline text-sm font-medium">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 @endsection

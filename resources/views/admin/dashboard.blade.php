@@ -33,12 +33,13 @@
     ['route' => 'admin.petadusun.index', 'label' => 'Kelola Peta', 'desc' => 'Tambah lokasi penting di peta dusun.'],
     ['route' => 'admin.perangkat.index', 'label' => 'Perangkat Dusun', 'desc' => 'Kelola struktur perangkat pemerintahan dusun.'],
     ['route' => 'admin.profil.index', 'label' => 'Profil Dusun', 'desc' => 'Atur informasi umum tentang dusun.'],
+    ['route' => 'admin.carousel.index', 'label' => 'Carousel', 'desc' => 'Atur tampilan banner di halaman beranda'],
     ];
     @endphp
 
     @foreach ($menu as $item)
     <a href="{{ route($item['route']) }}"
-        class="bg-kunyit/20 hover:bg-kunyit/30 transition shadow-sm hover:shadow-md rounded-xl p-5 block">
+        class="bg-white border-2 border-gray-200 rounded-xl shadow-md p-6 hover:bg-kunyit/30 transition shadow-sm hover:shadow-md rounded-xl p-5 block">
         <h3 class="text-lg font-semibold text-sogan">{{ $item['label'] }}</h3>
         <p class="text-sm text-gray-600">{{ $item['desc'] }}</p>
     </a>

@@ -10,6 +10,9 @@ use App\Models\Warga;
 use App\Models\News;
 use App\Models\PerangkatDusun;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class AdminController extends Controller
@@ -21,26 +24,26 @@ class AdminController extends Controller
 
     public function login(Request $request)
     {
-        $username = $request->input('username');
-        $password = $request->input('password');
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        $admin = DB::table('admins')->where('username', $username)->first();
-
-        if ($admin && Hash::check($password, $admin->password)) {
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('admin.dashboard'); 
         }
 
-        if ($admin) {
-            session(['admin_logged_in' => true]);
-            return redirect('/dashboard');
-        } else {
-            return back()->with('error', 'Username atau password salah.');
-        }
+        return back()->withErrors([
+            'email' => 'Email atau password salah.',
+        ])->onlyInput('email');
     }
+
 
     public function logout()
     {
         session()->forget('admin_logged_in');
-        return view('auth.logout-close');
+        return view('home');
     }
 
 
@@ -48,11 +51,14 @@ class AdminController extends Controller
     {
         $jumlahWarga = Warga::count();
         $jumlahBerita = News::count();
+        $jumlahJadwal = JadwalKegiatan::count();
+        $jumlahPerangkat = PerangkatDusun::count();
 
-        return view('admin.dashboard', [
-            'jumlahWarga' => Warga::count(),
-            'jumlahBerita' => News::count(),
-            'jumlahJadwal' => JadwalKegiatan::count(),
-            'jumlahPerangkat' => PerangkatDusun::count()
-        ]);    }
+        return view('admin.dashboard', compact(
+            'jumlahWarga',
+            'jumlahBerita',
+            'jumlahJadwal',
+            'jumlahPerangkat'
+        ));
+    }
 }

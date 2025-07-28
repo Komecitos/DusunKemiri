@@ -37,7 +37,7 @@ $slides = \App\Models\Carousel::latest()->take(5)->get();
             x-transition:leave-end="opacity-0"
             class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
             :style="`background-image: url(${slide.bg})`">
-            <div class="flex items-center justify-center text-center h-full bg-black/50">
+            <div class="flex items-center justify-center text-center h-full bg-gradient-to-t from-black/30 to-transparent">
                 <div class="text-white max-w-3xl px-4">
                     <h2 class="text-2xl md:text-4xl font-bold font-serif mb-4" x-text="slide.title"></h2>
                     <p class="text-sm md:text-lg leading-snug" x-text="slide.text1"></p>
@@ -60,28 +60,29 @@ $slides = \App\Models\Carousel::latest()->take(5)->get();
 
 <!-- NAVIGASI FITUR -->
 <section class="py-10 px-4 md:px-16 text-sogan text-center pt-5 pb-0">
-    <div class="mb-8 text-center">
-        <h1 class="text-2xl md:text-3xl font-medium mb-4">Jelajahi <span class="text-kunyit font-bold font-serif tracking-widest">Dusun Kemiri</span></h1>
+    <div class="mb-8 text-center pt-10">
+        <h1 class="text-2xl md:text-3xl font-medium mb-4">Jelajahi <span class="text-orange-700 font-bold font-serif tracking-widest">Dusun Kemiri</span></h1>
     </div>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-4xl mx-auto">
+        <a href="{{ url('/profil') }}" class="flex flex-col items-center hover:text-kunyit transition group">
+            <i class="fas fa-id-badge text-4xl md:text-5xl mb-2 transform group-hover:scale-90 transition duration-300 ease-out"></i>
+            <span class="font-semibold">Profil</span>
+        </a>
         <a href="{{ url('/berita') }}" class="flex flex-col items-center hover:text-kunyit transition group">
-            <img src="{{ asset('images/icons/news.png') }}" alt="Berita"
-                class="w-14 h-14 md:w-16 md:h-16 mb-2 transform group-hover:scale-90 transition duration-300 ease-out">
+            <i class="fab fa-readme text-4xl md:text-5xl mb-2 transform group-hover:scale-90 transition duration-300 ease-out"></i>
             <span class="font-semibold">Berita</span>
         </a>
         <a href="{{ url('/peta-dusun') }}" class="flex flex-col items-center hover:text-kunyit transition group">
-            <img src="{{ asset('images/icons/map.png') }}" alt="Peta"
-                class="w-14 h-14 md:w-16 md:h-16 mb-2 transform group-hover:scale-90 transition duration-300 ease-out">
+            <i class="fas fa-map-marked-alt text-4xl md:text-5xl mb-2 transform group-hover:scale-90 transition duration-300 ease-out"></i>
             <span class="font-semibold">Peta</span>
         </a>
         <a href="{{ url('/demografi') }}" class="flex flex-col items-center hover:text-kunyit transition group">
-            <img src="{{ asset('images/icons/social.png') }}" alt="Data Warga"
-                class="w-14 h-14 md:w-16 md:h-16 mb-2 transform group-hover:scale-90 transition duration-300 ease-out">
-            <span class="font-semibold">Data Warga</span>
+            <i class="fas fa-users text-4xl md:text-5xl mb-2 transform group-hover:scale-90 transition duration-300 ease-out"></i>
+            <span class="font-semibold">Warga</span>
         </a>
         <a href="{{ url('/jadwal') }}" class="flex flex-col items-center hover:text-kunyit transition group">
-            <img src="{{ asset('images/icons/schedule.png') }}" alt="Kegiatan"
-                class="w-14 h-14 md:w-16 md:h-16 mb-2 transform group-hover:scale-90 transition duration-300 ease-out">
+            <i class="fas fa-calendar-alt text-4xl md:text-5xl mb-2 transform group-hover:scale-90 transition duration-300 ease-out"></i>
             <span class="font-semibold">Kegiatan</span>
         </a>
     </div>

@@ -3,7 +3,7 @@
 @section('title', 'Detail Warga')
 
 @section('content')
-<div class="max-w-3xl mx-auto bg-white shadow-md rounded-xl p-6 font-roboto">
+<div class="max-w-3xl mx-auto bg-white shadow-md rounded-xl p-6 font-roboto border-l-4 border-sogan rounded-xl shadow-md mt-16">
     <h2 class="text-2xl font-bold text-sogan mb-6">Detail Warga</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-darkText">
@@ -22,8 +22,8 @@
 
     <div class="mt-6 flex justify-end">
         <a href="{{ route('admin.warga') }}"
-            class="inline-block px-4 py-2 bg-kunyit/10 text-sogan border border-kunyit rounded-lg hover:bg-kunyit/20 text-sm font-medium transition">
-            ← Kembali ke Daftar Warga
+            class="inline-block px-4 py-2 bg-sogan text-white border border-kunyit rounded-lg hover:bg-kunyit/20 text-sm font-medium transition">
+            Kembali ke Daftar Warga
         </a>
     </div>
 </div>

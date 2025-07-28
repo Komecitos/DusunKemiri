@@ -3,27 +3,27 @@
 @section('title', 'Tambah Marker')
 
 @section('content')
-<div class="max-w-3xl mx-auto px-4 py-6 font-roboto">
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-sogan">Tambah Marker Peta</h2>
-        <a href="{{ route('admin.petadusun.index') }}"
-            class="bg-gray-200 hover:bg-gray-300 text-sogan px-4 py-2 rounded-xl text-sm transition">
-            ← Kembali
-        </a>
-    </div>
+<div class="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl p-6 font-roboto border border-kunyit">
+    <h2 class="text-3xl font-medium text-sogan mb-6">Tambah Marker Peta</h2>
+
 
     <form action="{{ route('admin.petadusun.store') }}" method="POST"
-        class="bg-white shadow rounded-xl p-6 border border-kunyit space-y-4">
+        class="">
         @csrf
 
         {{-- Form Fields --}}
         @include('admin.peta.form')
 
-        <div class="flex justify-end">
+        <div class="md:col-span-2 flex justify-between">
+            <a href="{{ route('admin.petadusun.index') }}"
+                class="bg-sogan hover:bg-kunyit hover:text-sogan text-white px-6 py-2 rounded shadow transition">
+                Kembali
+            </a>
             <button type="submit"
-                class="bg-kunyit hover:bg-[#c69058] text-white px-5 py-2 rounded-xl shadow font-semibold transition">
+                class="bg-sogan hover:bg-kunyit hover:text-sogan text-white px-6 py-2 rounded shadow transition">
                 Simpan
             </button>
+
         </div>
     </form>
 </div>

@@ -5,14 +5,14 @@
 
     {{-- Header --}}
     <div class="pt-10 px-4 sm:px-20 mb-10">
-        <h1 class="text-3xl sm:text-4xl font-bold mb-2">Profil <span class="text-orange-700">Dusun Kemiri</span></h1>
+        <h1 class="text-3xl sm:text-4xl font-bold mb-2">Profil <span class="text-orange-700 font-serif tracking-widest">Dusun Kemiri</span></h1>
         <div class="h-1 w-20 bg-kunyit rounded"></div>
     </div>
 
     {{-- Sejarah --}}
     <section class="px-4 sm:px-20 mb-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div class="overflow-hidden rounded-2xl shadow-lg border border-gray-200">
-            <img src="{{ asset('images/tes/home/desa-1.jpg') }}" alt="Sejarah Dusun" class="w-full h-80 object-cover hover:scale-105 transition-transform duration-300">
+            <img src="{{ asset('images/profil/IMG_3425-min.jpg') }}" alt="Sejarah Dusun" class="w-full h-80 object-cover hover:scale-105 transition-transform duration-300">
         </div>
         <div>
             <h2 class="text-3xl font-semibold text-sogan mb-4">Sejarah Dusun Kemiri</h2>
@@ -23,25 +23,25 @@
     {{-- Visi Misi --}}
     <section class="px-4 sm:px-20 mb-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div>
-            <h2 class="text-3xl font-semibold text-orange-600 mb-4">Visi</h2>
+            <h2 class="text-3xl font-semibold text-sogan mb-4">Visi</h2>
             <p class="text-gray-700 mb-6">{{ $profil->visi }}</p>
-            <h2 class="text-3xl font-semibold text-orange-600 mb-4">Misi</h2>
+            <h2 class="text-3xl font-semibold text-sogan mb-4">Misi</h2>
             <p class="text-gray-700 leading-relaxed">{!! nl2br(e($profil->misi)) !!}</p>
         </div>
         <div class="overflow-hidden rounded-2xl shadow-lg border border-gray-200">
-            <img src="{{ asset('images/tes/home/desa-1.jpg') }}" alt="Visi Misi" class="w-full h-80 object-cover hover:scale-105 transition-transform duration-300">
+            <img src="{{ asset('images/profil/IMG_3422-min.jpg') }}" alt="Visi Misi" class="w-full h-80 object-cover hover:scale-105 transition-transform duration-300">
         </div>
     </section>
 
     {{-- Sosial Budaya & Potensi --}}
     <section class="px-4 sm:px-20 mb-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div class="overflow-hidden rounded-2xl shadow-lg border border-gray-200">
-            <img src="{{ asset('images/tes/home/desa-1.jpg') }}" alt="Potensi Dusun" class="w-full h-80 object-cover hover:scale-105 transition-transform duration-300">
+            <img src="{{ asset('images/profil/IMG_1450-min.jpg') }}" alt="Potensi Dusun" class="w-full h-80 object-cover hover:scale-105 transition-transform duration-300">
         </div>
         <div>
-            <h2 class="text-3xl font-semibold text-orange-600 mb-4">Kondisi Sosial Budaya</h2>
+            <h2 class="text-3xl font-semibold text-sogan mb-4">Kondisi Sosial Budaya</h2>
             <p class="text-gray-700 mb-4">{{ $profil->kondisi_sosial_budaya }}</p>
-            <h2 class="text-3xl font-semibold text-orange-600 mb-4">Potensi Dusun</h2>
+            <h2 class="text-3xl font-semibold text-sogan mb-4">Potensi Dusun</h2>
             <p class="text-gray-700">{{ $profil->potensi_dusun }}</p>
         </div>
     </section>
@@ -49,10 +49,10 @@
     {{-- Letak Geografis --}}
     <section class="px-4 sm:px-20 mb-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div>
-            <h2 class="text-3xl font-semibold text-orange-600 mb-4">Letak Geografis</h2>
+            <h2 class="text-3xl font-semibold text-sogan mb-4">Letak Geografis</h2>
             <p class="text-gray-700 mb-4">{{ $profil->letak_geografis }}</p>
 
-            <h3 class="text-2xl font-semibold text-orange-600 mb-2">Batas Wilayah</h3>
+            <h3 class="text-2xl font-semibold text-sogan mb-2">Batas Wilayah</h3>
             <div class="grid grid-cols-2 gap-4 text-gray-700 ml-4">
                 <p><strong>Utara:</strong> Berbatas dengan ...</p>
                 <p><strong>Timur:</strong> Berbatas dengan ...</p>
@@ -66,7 +66,7 @@
             </div>
         </div>
         <div class="overflow-hidden rounded-2xl shadow-lg border border-gray-200">
-            <img src="{{ asset('images/tes/home/desa-1.jpg') }}" alt="Geografis" class="w-full h-80 object-cover hover:scale-105 transition-transform duration-300">
+            <img src="{{ asset('images/profil/IMG_3405-min.jpg') }}" alt="Geografis" class="w-full h-80 object-cover hover:scale-105 transition-transform duration-300">
         </div>
     </section>
 
