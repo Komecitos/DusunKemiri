@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container pt-5 ml-12 lg-20 mb-8 font-sans">
-    <h2 class="text-2xl font-bold text-sogan mb-10">Statistik Penduduk <span class="text-orange-700 font-serif tracking-widest">Dusun Kemiri</span></h2>
+<div class="container pt-5 px-4 sm:px-6 lg:px-8 mb-8 font-sans">
+    <h2 class="text-xl sm:text-2xl font-bold text-sogan mb-10">
+        Statistik Penduduk <span class="text-orange-700 font-serif tracking-widest">Dusun Kemiri</span>
+    </h2>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-10">
         <div class="bg-white border-l-4 border-kunyit shadow-md rounded-2xl p-5">
             <p class="text-sm text-gray-500">Total Penduduk</p>
             <p class="text-3xl font-bold text-sogan">{{ $totalPenduduk }}</p>
@@ -33,18 +35,18 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="py-4">
             <h3 class="text-xl font-semibold mb-4">Grafik Jumlah Warga per RT</h3>
-            <canvas id="rtChart"></canvas>
+            <canvas id="rtChart" class="w-full max-w-full"></canvas>
         </div>
         <div class="py-4">
             <h3 class="text-xl font-semibold mb-4">Grafik Jumlah Warga per RW</h3>
-            <canvas id="rwChart"></canvas>
+            <canvas id="rwChart" class="w-full max-w-full"></canvas>
         </div>
     </div>
 
     <div class="py-4">
         <h3 class="text-xl font-semibold mb-4">Grafik Kelompok Umur Penduduk</h3>
         <div class="overflow-x-auto">
-            <canvas id="umurChart" class="w-full"></canvas>
+            <canvas id="umurChart" class="w-full max-w-full"></canvas>
         </div>
     </div>
 
@@ -52,7 +54,7 @@
         <h3 class="text-xl font-semibold mb-6">Data Pekerjaan Warga</h3>
         <div class="grid md:grid-cols-2 gap-6 items-start">
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white border border-kunyit rounded-xl shadow">
+                <table class="min-w-[300px] bg-white border border-kunyit rounded-xl shadow">
                     <thead class="bg-kunyit text-white">
                         <tr>
                             <th class="py-2 px-4 text-left">No</th>
@@ -71,13 +73,13 @@
                     </tbody>
                 </table>
             </div>
-            <div>
-                <canvas id="pekerjaanPieChart" width="300" height="260"></canvas>
+            <div class="w-full md:w-[300px]">
+                <canvas id="pekerjaanPieChart" class="w-full h-auto"></canvas>
             </div>
         </div>
     </div>
 
-    <div class="">
+    <div class="py-4">
         <h3 class="text-xl font-semibold mb-4">Data Pendidikan Terakhir</h3>
         <div class="overflow-x-auto">
             <canvas id="pendidikanChart" class="w-full max-h-[400px]"></canvas>
@@ -86,7 +88,7 @@
 
     <div class="py-4">
         <h3 class="text-xl font-semibold mb-4">Distribusi Agama</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             @foreach ($jumlahPerAgama as $agama => $jumlah)
             <div class="bg-white shadow-md border-l-4 border-kunyit rounded-xl p-5">
                 <p class="text-sm text-gray-500">Agama</p>

@@ -10,7 +10,7 @@ class ProfilDusunController extends Controller
 {
     public function index()
     {
-        $profil = \App\Models\ProfilDusun::first(); 
+        $profil = \App\Models\ProfilDusun::first();
         return view('admin.profil.index', compact('profil'));
     }
     public function edit()

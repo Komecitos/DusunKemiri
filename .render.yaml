@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: website-dusun-kemiri
+    env: docker
+    branch: develop
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_URL
+        value: https://website-dusun-kemiri.onrender.com
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: <isi dari render database>
+      - key: DB_PORT
+        value: 3306
+      - key: DB_DATABASE
+        value: <nama_db>
+      - key: DB_USERNAME
+        value: <user_db>
+      - key: DB_PASSWORD
+        value: <password_db>
